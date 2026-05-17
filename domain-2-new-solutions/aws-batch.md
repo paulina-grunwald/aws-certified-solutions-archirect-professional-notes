@@ -233,18 +233,18 @@ Submit jobs that depend on other jobs — Batch waits for predecessors to succee
 
 ## Exam Traps
 
-- ❌ **Multi-Node Parallel Jobs don't support Spot Instances** — they need guaranteed nodes; pick On-Demand
-- ❌ **AWS Batch is NOT Lambda for jobs** — Lambda has a 15-min hard limit; Batch has no time limit and supports any container
-- ❌ **BEST_FIT default can stall the queue** if cheapest instance is unavailable; use BEST_FIT_PROGRESSIVE or SPOT_CAPACITY_OPTIMIZED for resilience
-- ❌ **Fargate has limits**: max 16 vCPU, 120 GB memory per task as of 2024; for larger jobs use EC2
-- ❌ **Job definitions are versioned** — updating creates a new revision; jobs reference a specific version
-- ❌ **Job role ≠ execution role** — execution role lets ECS pull images and push logs; job role lets your code call AWS APIs
-- ❌ **CloudWatch Events is the old name** — it's now **EventBridge**; same service, new branding
-- ❌ **Array job indexes are passed via env var** `AWS_BATCH_JOB_ARRAY_INDEX` — don't pass them as command-line args
-- ❌ **You can't change a job's queue after submission** — must terminate and resubmit
-- ❌ **Compute environments are region-scoped** — for multi-region batch you need separate environments per Region
-- ❌ **Private subnets must have a route to ECS** (NAT GW or VPC Endpoints for ECS + ECR + Logs + S3) — common networking pitfall
-- ❌ **Batch is not for real-time / synchronous request-response** — it's queue-based; use Lambda, App Runner, or ECS Service for that
-- ❌ **Don't confuse Batch with Step Functions** — Batch runs the jobs; SFN orchestrates the workflow. They're complementary.
-- ❌ **Job retries are not infinite** — max 10 attempts; design for idempotency
-- ❌ **Spot interruption is not failure** by default — configure retry strategy to retry on `SpotInterruption` reason but not on application errors
+- **Multi-Node Parallel Jobs don't support Spot Instances** — they need guaranteed nodes; pick On-Demand
+- **AWS Batch is NOT Lambda for jobs** — Lambda has a 15-min hard limit; Batch has no time limit and supports any container
+- **BEST_FIT default can stall the queue** if cheapest instance is unavailable; use BEST_FIT_PROGRESSIVE or SPOT_CAPACITY_OPTIMIZED for resilience
+- **Fargate has limits**: max 16 vCPU, 120 GB memory per task as of 2024; for larger jobs use EC2
+- **Job definitions are versioned** — updating creates a new revision; jobs reference a specific version
+- **Job role ≠ execution role** — execution role lets ECS pull images and push logs; job role lets your code call AWS APIs
+- **CloudWatch Events is the old name** — it's now **EventBridge**; same service, new branding
+- **Array job indexes are passed via env var** `AWS_BATCH_JOB_ARRAY_INDEX` — don't pass them as command-line args
+- **You can't change a job's queue after submission** — must terminate and resubmit
+- **Compute environments are region-scoped** — for multi-region batch you need separate environments per Region
+- **Private subnets must have a route to ECS** (NAT GW or VPC Endpoints for ECS + ECR + Logs + S3) — common networking pitfall
+- **Batch is not for real-time / synchronous request-response** — it's queue-based; use Lambda, App Runner, or ECS Service for that
+- **Don't confuse Batch with Step Functions** — Batch runs the jobs; SFN orchestrates the workflow. They're complementary.
+- **Job retries are not infinite** — max 10 attempts; design for idempotency
+- **Spot interruption is not failure** by default — configure retry strategy to retry on `SpotInterruption` reason but not on application errors
