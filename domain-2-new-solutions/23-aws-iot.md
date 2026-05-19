@@ -276,18 +276,18 @@ The foundation of every IoT workload on AWS.
 
 ## Exam Traps
 
-- **IoT 1-Click is discontinued (Dec 2024)** — if it appears as a multiple-choice option for fleet management, it's wrong
-- **IoT Events is EOL May 2026** — for new designs, prefer Kinesis + Lambda + EventBridge; still appears as exam answer for state-detection scenarios
-- **IoT Analytics is deprecated** — migrate to Athena + Glue + S3
-- **IoT Core ≠ IoT Device Management** — Core is the protocol broker + registry; Device Management adds fleet operations on top
-- **Greengrass ≠ Outposts** — Greengrass is software on your hardware; Outposts is AWS hardware in your facility
-- **Greengrass V1 is EOL** (June 2023) — V2 is the current version with different architecture
-- **MQTT messages have a 128 KB payload limit** — for larger data use Basic Ingest with S3 directly via rules engine
-- **IoT policies are NOT IAM policies** — they look similar but are evaluated per MQTT topic and use different action names (`iot:Publish`, not `s3:PutObject`)
-- **Device Shadow is per-device** — for fleet-wide queries use Fleet Indexing
-- **Rules Engine routes individual messages** — for aggregation/windowing use Kinesis Data Analytics / Managed Service for Apache Flink downstream
-- **SiteWise is NOT a general-purpose IoT service** — it's specifically for industrial OPC-UA / PLC data
-- **FleetWise is automotive-only** — don't pick it for generic device telemetry
-- **TwinMaker doesn't ingest data** — it overlays existing data sources (SiteWise, S3, Kinesis Video) onto 3D scenes
-- **Cognito Identity Pools** can be used to grant IoT permissions to mobile / browser apps, but device-to-device auth uses X.509 certs
-- **IoT Core has no "always-on connection" requirement** — devices can connect, publish, disconnect; the broker holds messages briefly for QoS 1 delivery
+- IoT 1-Click was **discontinued Dec 2024** — if it appears as a choice for fleet management, it is wrong
+- IoT Events reaches **end of support May 2026** — for new designs, prefer Kinesis + Lambda + EventBridge, though it still appears as the exam answer for state-detection scenarios
+- IoT Analytics is **deprecated** — the replacement stack is Athena + Glue + S3
+- IoT Core is the **protocol broker + registry**; IoT Device Management adds **fleet operations** on top — they are separate services
+- Greengrass is **software on your hardware**; Outposts is **AWS-supplied hardware** in your facility — don't confuse them
+- Greengrass **V2 is the current version** (V1 reached EOL June 2023) — V2 has a different architecture
+- MQTT messages have a **128 KB payload limit** — for larger data, use Basic Ingest with S3 directly via the rules engine
+- IoT policies are evaluated **per MQTT topic** and use IoT-specific action names (`iot:Publish`, not `s3:PutObject`) — they are not IAM policies despite looking similar
+- Device Shadow is **per-device** — for fleet-wide queries, use Fleet Indexing instead
+- The Rules Engine routes **individual messages** — for aggregation and windowing, use Kinesis Data Analytics / Managed Service for Apache Flink downstream
+- SiteWise is **specifically for industrial OPC-UA / PLC data** — it is not a general-purpose IoT service
+- FleetWise is **automotive-only** (CAN bus, vehicle fleets) — don't pick it for generic device telemetry
+- TwinMaker is a **visualization overlay** on existing data sources (SiteWise, S3, Kinesis Video) — it does not ingest data itself
+- Device-to-device auth uses **X.509 certificates** — Cognito Identity Pools can grant IoT permissions to mobile / browser apps but not for device-to-device communication
+- IoT Core supports **connect-publish-disconnect** patterns — there is no "always-on connection" requirement. The broker holds messages briefly for QoS 1 delivery
