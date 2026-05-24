@@ -8,7 +8,7 @@ Maps to: **Domain 1.1 — Architect network connectivity strategies** (foundatio
 
 ## Overview
 
-As of 2026: **36 Regions** (and growing), **114+ Availability Zones**, **500+ edge locations** (Points of Presence), plus specialised footprint like Local Zones, Wavelength Zones, Outposts, and the AWS GovCloud / China partitions.
+**36 Regions** (and growing), **114+ Availability Zones**, **500+ edge locations** (Points of Presence), plus specialised footprint like Local Zones, Wavelength Zones, Outposts, and the AWS GovCloud / China partitions.
 
 ---
 
@@ -22,7 +22,9 @@ As of 2026: **36 Regions** (and growing), **114+ Availability Zones**, **500+ ed
 - **Cross-Region traffic** uses the AWS global backbone
 
 ### Partitions
+
 AWS Regions are grouped into **partitions** — independent administrative boundaries:
+
 - `aws` — standard commercial Regions
 - `aws-cn` — China (Beijing, Ningxia), under Chinese law via local partners; **separate IAM, separate accounts**
 - `aws-us-gov` — AWS GovCloud (US-East, US-West) — isolated, US-government workloads, FedRAMP High; **separate accounts**
@@ -91,16 +93,16 @@ ARNs include the partition: `arn:aws:s3:::bucket` vs `arn:aws-us-gov:s3:::bucket
 
 ## Lambda@Edge vs CloudFront Functions
 
-| Feature | **Lambda@Edge** | **CloudFront Functions** |
-|---|---|---|
-| Runtime | Node.js, Python | JavaScript only |
-| Where it runs | Regional Edge Caches | Edge Locations (closer to user) |
-| Max execution time | 5-30s by trigger | < 1 ms |
-| Max memory | 128 MB - 10 GB | 2 MB |
-| Network / file system | Yes | No |
-| Cost | Higher | ~6× cheaper |
-| Triggers | Viewer request, Origin request, Origin response, Viewer response | Viewer request, Viewer response only |
-| Use cases | Heavy logic, external API calls, image manipulation | URL rewrites, header manipulation, A/B routing |
+| Feature               | **Lambda@Edge**                                                  | **CloudFront Functions**                       |
+| --------------------- | ---------------------------------------------------------------- | ---------------------------------------------- |
+| Runtime               | Node.js, Python                                                  | JavaScript only                                |
+| Where it runs         | Regional Edge Caches                                             | Edge Locations (closer to user)                |
+| Max execution time    | 5-30s by trigger                                                 | < 1 ms                                         |
+| Max memory            | 128 MB - 10 GB                                                   | 2 MB                                           |
+| Network / file system | Yes                                                              | No                                             |
+| Cost                  | Higher                                                           | ~6× cheaper                                    |
+| Triggers              | Viewer request, Origin request, Origin response, Viewer response | Viewer request, Viewer response only           |
+| Use cases             | Heavy logic, external API calls, image manipulation              | URL rewrites, header manipulation, A/B routing |
 
 - Both **require CloudFront**
 - **Lightweight, ultra-fast** edge transforms → **CloudFront Functions**
@@ -115,7 +117,7 @@ ARNs include the partition: `arn:aws:s3:::bucket` vs `arn:aws-us-gov:s3:::bucket
 - Integrates with **AWS WAF, Shield, ACM, Cognito**
 - **Origin Shield** — additional caching layer between Regional Edge Caches and origins
 - **Origin Access Control (OAC)** — secure S3 origin so only CloudFront can fetch (replaces older OAI)
-- **2024–2026 features**: CloudFront distribution **tenants** for multi-tenant SaaS, enhanced security with managed rules, granular cache behaviors
+- CloudFront distribution **tenants** for multi-tenant SaaS, enhanced security with managed rules, granular cache behaviors
 
 ---
 
@@ -132,16 +134,16 @@ ARNs include the partition: `arn:aws:s3:::bucket` vs `arn:aws-us-gov:s3:::bucket
 
 ## Picking the Right Edge Footprint
 
-| Use case | Service |
-|---|---|
-| Cache static / dynamic HTTP content | **CloudFront** |
-| Edge HTTP transforms (lightweight) | **CloudFront Functions** |
-| Edge HTTP logic (heavier) | **Lambda@Edge** |
-| TCP / UDP traffic acceleration with static IPs | **Global Accelerator** |
-| Latency-sensitive compute in a specific city | **Local Zones** |
-| Latency-sensitive compute on 5G | **Wavelength Zones** |
-| Workloads on customer premises | **Outposts** |
-| Global anycast DNS resolver | **Route 53 Global Resolver** (2026) |
+| Use case                                       | Service                             |
+| ---------------------------------------------- | ----------------------------------- |
+| Cache static / dynamic HTTP content            | **CloudFront**                      |
+| Edge HTTP transforms (lightweight)             | **CloudFront Functions**            |
+| Edge HTTP logic (heavier)                      | **Lambda@Edge**                     |
+| TCP / UDP traffic acceleration with static IPs | **Global Accelerator**              |
+| Latency-sensitive compute in a specific city   | **Local Zones**                     |
+| Latency-sensitive compute on 5G                | **Wavelength Zones**                |
+| Workloads on customer premises                 | **Outposts**                        |
+| Global anycast DNS resolver                    | **Route 53 Global Resolver** (2026) |
 
 ---
 
