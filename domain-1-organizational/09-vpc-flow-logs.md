@@ -49,7 +49,7 @@ Flow logs can be created at three levels:
 
 ---
 
-## Flow Log Record Fields (V2–V7)
+## Flow Log Record Fields (V2–V8)
 
 ### Version 2 (default fields)
 
@@ -80,6 +80,12 @@ Flow logs can be created at three levels:
 - **`ecs-cluster-name`**, **`ecs-cluster-arn`**, **`ecs-service-name`**
 - **`ecs-task-id`**, **`ecs-task-arn`**, **`ecs-task-definition-arn`**
 - **`ecs-container-id`**, **`ecs-second-container-id`**, **`ecs-container-instance-id`**, **`ecs-container-instance-arn`**
+
+### Version 8 (2025 — reject reason)
+
+- **`reject-reason`** — explains **why** a packet was REJECTed (e.g., `BPA` for Block Public Access on internet gateways, `unknown` for other reject paths)
+- Custom format auto-sets `version` to the highest field used — including `reject-reason` bumps records to V8
+- Critical for triaging connectivity failures: lets you distinguish **SG / NACL drops** from **BPA drops** without packet captures
 
 > 💡 **`pkt-srcaddr` vs `srcaddr`**: critical for NAT / NLB traffic — `srcaddr` shows the NAT/NLB ENI IP, `pkt-srcaddr` shows the originating client IP. Always use `pkt-*` fields when troubleshooting connectivity through NAT or NLB.
 
@@ -183,7 +189,8 @@ Flow logs can be created at three levels:
 - **`pkt-srcaddr` / `pkt-dstaddr`** show original endpoints when traffic flows through NAT GW, NLB, or proxies — critical for troubleshooting
 - For **TGW central inspection** scenarios → consider **TGW Flow Logs**, a separate feature
 - Flow Logs are enabled per-resource; use **SCPs + AWS Config rules** to enforce them org-wide
-- **Default format = V2 fields only** — use custom format to capture V3+ fields (`vpc-id`, `instance-id`, `pkt-srcaddr`, ECS metadata, etc.)
+- **Default format = V2 fields only** — use custom format to capture V3+ fields (`vpc-id`, `instance-id`, `pkt-srcaddr`, ECS metadata, `reject-reason`, etc.)
+- **V8 `reject-reason` (2025)** tells you WHY a packet was rejected (e.g., `BPA` for Block Public Access) — distinguish SG/NACL drops from BPA drops
 
 ---
 
@@ -200,7 +207,7 @@ Flow logs can be created at three levels:
 - For DNS query auditing, use **Route 53 Resolver Query Logs** — Flow Logs do not capture DNS query details
 - Flow Logs on a peered VPC require the **peer to be in the same account** — you cannot enable them on a cross-account peered VPC
 - Flow Logs are **all-or-nothing per ENI** with no inclusion/exclusion filters — log everything, then filter at the destination (CloudWatch Logs filter, Athena query). For packet-level filtering, use Network Firewall
-- Existing flow logs **do not auto-upgrade** to newer field versions — to capture V7 ECS fields, you must delete and recreate with a custom format
+- Existing flow logs **do not auto-upgrade** to newer field versions — to capture V7 ECS or V8 `reject-reason` fields, you must delete and recreate with a custom format
 - `SKIPDATA` failures are **silent** — if the IAM role lacks `logs:CreateLogStream` / `logs:PutLogEvents`, records are dropped without a console error. Always validate the role's trust policy for `vpc-flow-logs.amazonaws.com`
 - VPC-level Flow Logs log **every ENI in the VPC** — a busy multi-AZ VPC can generate TBs/month into CloudWatch Logs at $0.50/GB ingestion. For long-term retention, send to S3 in Parquet instead
 - S3 delivery adds **~5 minutes of delay** on top of the aggregation interval — it is not just the 1/10-min aggregation window
