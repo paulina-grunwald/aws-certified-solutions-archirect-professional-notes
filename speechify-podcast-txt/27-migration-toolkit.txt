@@ -1,0 +1,113 @@
+Podcast 27 — Migration Toolkit
+
+Length target: 15 min
+Repo references: domain-4-migration/01-cloud-migrations.md, 02-dms.md, 03-mgn.md, 04-datasync.md, 05-snow-family.md, 06-storage-gateway.md, domain-2-new-solutions/37-other-services.md (Transfer Family)
+
+Topic & Scope
+
+The 7 R’s, migration discovery + planning tools, server migration (MGN), database migration (DMS + SCT), data transfer (DataSync, Snow Family, Transfer Family, Storage Gateway).
+
+Service Coverage Depth
+
+Deep:
+- 7 R’s (Retire, Retain, Rehost, Relocate, Repurchase, Replatform, Refactor)
+- AWS Application Migration Service (MGN) — block-level for servers
+- AWS DMS + Schema Conversion Tool (SCT) — database migration
+- DataSync — file-level network migration
+
+Brief:
+- Snow Family (Snowcone, Snowball Edge, Snowmobile)
+- Transfer Family (SFTP / FTPS / FTP / AS2)
+- Migration Hub + Application Discovery Service
+- Migration Evaluator
+
+Structured Outline
+
+1.  Open (30s) — “Migration is Domain 4 — 20% of the exam. The 7 R’s + a handful of services cover most questions.”
+2.  The 7 R’s (3 min) — Retire (decommission), Retain (keep on-prem), Rehost (lift & shift), Relocate (move VMware to AWS Cloud), Repurchase (move to SaaS), Replatform (lift, tinker, shift), Refactor (re-architect)
+3.  Discovery & Planning (2 min) — Application Discovery Service (agent-based + agentless), Migration Hub (status tracking), Migration Evaluator (TCO + sizing)
+4.  MGN (3 min) — agent-based continuous block-level replication, source → staging → cutover, support for any OS, replaces SMS
+5.  DMS + SCT (3.5 min) — DMS migrates data (homogeneous + heterogeneous), CDC for ongoing replication, SCT converts schema (Oracle/SQL Server → PostgreSQL/MySQL/Aurora), DMS Serverless option
+6.  DataSync + Snow Family + Transfer Family (2.5 min) — DataSync (network bulk move), Snow Family (offline shipping when bandwidth limited), Transfer Family (managed SFTP/FTPS/FTP/AS2)
+7.  Rapid-Fire Trap Drill (60s)
+
+Must-Mention Exam Tips
+
+- 7 R’s: memorize the names + a sentence definition each
+- Rehost = lift-and-shift — fastest, least optimization
+- Replatform = “lift, tinker, shift” — small changes (e.g., RDS instead of self-managed MySQL)
+- Refactor = re-architect (containers, serverless, etc.)
+- Application Discovery Service: agent (deeper data) + agentless (VMware-based)
+- Migration Hub: dashboard across MGN / DMS / Discovery
+- Migration Evaluator (formerly TSO Logic): TCO analysis + right-sizing for migration planning
+- MGN: continuous block-level replication, RPO seconds, supports any OS that boots on EC2 nitro instance types
+- MGN replaces CloudEndure Migration + Server Migration Service (SMS)
+- DMS: homogeneous (MySQL → MySQL) + heterogeneous (Oracle → Aurora PG) migrations
+- DMS CDC (Change Data Capture) keeps source + target in sync for cutover
+- SCT: Schema Conversion Tool — converts schema between engines, generates code change reports
+- DMS Serverless: auto-scales capacity, pay-as-you-go
+- DataSync: agent on source, transfers to S3/EFS/FSx, 10× faster than rsync, automatic encryption + integrity checks
+- DataSync sources: NFS, SMB, HDFS, Object Storage (S3-compatible), Google Cloud Storage, Azure Files
+- Snow Family: Snowcone (small, edge, 8 TB), Snowball Edge Storage Optimized (80 TB usable), Snowball Edge Compute Optimized (with GPU option), Snowmobile (100 PB truck — being phased out)
+- Snow Family encrypts at rest (256-bit) + in transit; e-ink shipping labels
+- Transfer Family: managed SFTP / FTPS / FTP / AS2 backed by S3 or EFS, custom auth via Lambda, supports user lifecycle
+
+Must-Mention Exam Traps
+
+- EXAM TRAP: “Lift and shift” = REHOST; “lift, tinker, shift” = REPLATFORM — different
+- EXAM TRAP: MGN ≠ DRS — MGN is for migration (one-time cutover); DRS is for ongoing DR
+- EXAM TRAP: DMS migrates DATA, not schema — for schema use SCT
+- EXAM TRAP: DMS CDC has source-engine support requirements — Oracle needs LogMiner / Binary Reader
+- EXAM TRAP: DataSync is for online network transfer — for limited bandwidth or air-gapped use Snow Family
+- EXAM TRAP: DataSync requires DataSync agent on source — except for AWS-to-AWS (no agent needed)
+- EXAM TRAP: Snowball Edge has compute — can run EC2 + Lambda offline
+- EXAM TRAP: Snowmobile (100 PB truck) is being phased out — most exam questions use Snowball Edge variants
+- EXAM TRAP: Transfer Family is for incoming file transfers — NOT for AWS-to-on-prem (use DataSync or Storage Gateway)
+- EXAM TRAP: Application Discovery + Migration Hub work together — Discovery feeds Hub
+- EXAM TRAP: VMware Cloud on AWS is a Relocate strategy (move VMs with same hypervisor)
+- EXAM TRAP: 7 R’s pick depends on cost / complexity tradeoff — usually Replatform is “sweet spot” for SAP-C02
+- EXAM TRAP: SCT generates a code conversion REPORT — manual rework still needed for stored procedures
+
+Key Decision Matrix
+
+  ------------------------------------------------------------------------------------------
+  Scenario                                             Pick
+  ---------------------------------------------------- -------------------------------------
+  Move servers as-is to EC2                            Application Migration Service (MGN)
+
+  Move database with engine change                     DMS + SCT
+
+  Continuously replicate DB during migration           DMS CDC
+
+  Inventory + plan on-prem servers                     Application Discovery Service
+
+  Track migration progress across services             Migration Hub
+
+  TCO analysis + sizing for migration                  Migration Evaluator
+
+  Online file transfer at scale                        DataSync
+
+  Offline transfer (PB+, limited bandwidth)            Snowball Edge
+
+  Small edge data collection (TB)                      Snowcone
+
+  Hybrid on-prem file share via SMB/NFS backed by S3   Storage Gateway File Gateway
+
+  Inbound SFTP / FTP / AS2 to S3 / EFS                 Transfer Family
+
+  Re-architect to containers / serverless              Refactor
+
+  Lift and shift simple workload                       Rehost (MGN)
+
+  Modify slightly (managed DB swap)                    Replatform
+  ------------------------------------------------------------------------------------------
+
+Tone & Style
+
+- Sing-song the 7 R’s with examples
+- Frame MGN as “lift-and-shift” engine
+- Repeat “DMS = data, SCT = schema”
+
+Rapid-Fire Closer
+
+“Lift-and-shift servers?” — “MGN (Rehost).” “DB engine change?” — “DMS + SCT.” “Limited bandwidth bulk move?” — “Snowball Edge.” “Online file transfer?” — “DataSync.” “Inbound SFTP?” — “Transfer Family.” “Migration progress dashboard?” — “Migration Hub.”

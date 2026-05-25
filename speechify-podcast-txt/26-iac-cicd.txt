@@ -1,0 +1,104 @@
+Podcast 26 — IaC & CI/CD
+
+Length target: 15 min
+Repo references: domain-2-new-solutions/21-cloudformation.md, domain-4-migration/07-cicd.md, domain-2-new-solutions/44-codeguru.md, 39-proton.md, domain-1-organizational/48-service-catalog.md
+
+Topic & Scope
+
+CloudFormation (and SAM/CDK), CodePipeline + CodeBuild + CodeDeploy + CodeArtifact, CodeGuru, plus the platform tier (Proton, Service Catalog). Deployment strategies + CI/CD patterns.
+
+Service Coverage Depth
+
+Deep:
+- CloudFormation — templates, change sets, stack sets, drift detection, custom resources, nested stacks
+- CodePipeline + CodeBuild + CodeDeploy — pipeline orchestration, build, deployment strategies
+- Deployment strategies (rolling, blue/green, canary, linear)
+
+Brief:
+- SAM (Lambda-focused IaC)
+- CDK (code-as-IaC)
+- CodeArtifact (private package registry)
+- CodeGuru (reviewer + profiler + security)
+- Proton + Service Catalog (covered in podcasts 15 + 4)
+
+Structured Outline
+
+1.  Open (30s) — “IaC + CI/CD = how you deploy reliably. CloudFormation, the Code* family, deployment strategies — let’s go.”
+2.  CloudFormation Deep (4 min) — stacks, templates (YAML/JSON), parameters, mappings, conditions, outputs, change sets, drift detection, custom resources (Lambda-backed), nested stacks, StackSets (multi-account / multi-Region)
+3.  SAM + CDK (1.5 min) — SAM = Lambda + serverless transform; CDK = code (Python/TS/Java/C#/Go) compiles to CloudFormation
+4.  CodePipeline + CodeBuild + CodeDeploy (4 min) — Pipeline = orchestration with stages + actions; Build = managed build containers; Deploy = blue/green for Lambda + ECS, in-place + blue/green for EC2 ASG
+5.  Deployment Strategies (2.5 min) — Rolling (in-place), Blue/Green (two environments swap), Canary (small % then full), Linear (incremental %), shift via deployment configuration
+6.  Tooling Around (2 min) — CodeArtifact (private packages), CodeGuru Reviewer / Profiler / Security, Service Catalog for vending, Proton for platform engineering
+7.  Rapid-Fire Trap Drill (60s)
+
+Must-Mention Exam Tips
+
+- CloudFormation template sections: Parameters, Mappings, Conditions, Resources (required), Outputs, Transform, Metadata
+- Change sets preview changes before applying — use for safe updates
+- Drift detection identifies manual changes outside CFN
+- Custom resources: Lambda-backed; for resources CFN doesn’t support natively
+- Nested stacks: modularize templates
+- StackSets: deploy templates across accounts + Regions (self-managed or service-managed via Organizations)
+- DeletionPolicy (Retain / Snapshot / Delete) + UpdateReplacePolicy
+- SAM Transform: macro that simplifies Lambda + API Gateway + DynamoDB authoring
+- CDK: write IaC in TypeScript / Python / Java / C# / Go; synthesizes to CFN
+- CDK constructs (L1/L2/L3) — L2 abstracts CFN; L3 is patterns
+- CodePipeline: source → build → test → deploy stages with actions
+- CodePipeline V1 vs V2 — V2 supports triggers, variables, parameters
+- CodeBuild: managed build containers, custom or AWS-curated, integrates with secrets
+- CodeDeploy strategies for Lambda: Canary (e.g., 10% for 5min then 100%), Linear (10% every X min)
+- CodeDeploy strategies for ECS: Blue/Green via ALB target group swap
+- CodeDeploy strategies for EC2 ASG: in-place rolling or blue/green
+- CodeArtifact: private package repository for npm / Maven / PyPI / NuGet / Cargo / Ruby
+- CodeGuru Reviewer: ML code review on PRs (Java + Python)
+- CodeGuru Profiler: production profiling
+- CodeGuru Security: source code security scanning
+
+Must-Mention Exam Traps
+
+- EXAM TRAP: CloudFormation rolls back on failure by default — disable rollback for debugging
+- EXAM TRAP: Stack deletion can fail on RetentionPolicy=Retain resources — they stay
+- EXAM TRAP: Change sets don’t auto-apply — must execute
+- EXAM TRAP: StackSet service-managed needs Organizations + delegated administrator
+- EXAM TRAP: CodeCommit is closed to new customers — use GitHub / GitLab / Bitbucket / CodeConnections
+- EXAM TRAP: CodeDeploy in-place takes downtime; blue/green doesn’t
+- EXAM TRAP: Lambda Canary requires alias + traffic shifting — not Linear deployment by version directly
+- EXAM TRAP: CodeDeploy blue/green for EC2 needs a separate ASG for green — uses ELB target group swap
+- EXAM TRAP: CodeBuild buildspec.yml location — at root by default; configurable
+- EXAM TRAP: CodeDeploy hooks (BeforeInstall, AfterInstall, etc.) for EC2 require agent
+- EXAM TRAP: CDK ≠ CloudFormation directly — CDK synthesizes to CFN, but operates via CFN under the hood
+- EXAM TRAP: SAM is for serverless — for general infra use CFN/CDK
+- EXAM TRAP: Service Catalog ≠ CodePipeline — Catalog is curated vending; Pipeline is CI/CD
+- EXAM TRAP: Proton is platform engineering — not a CI/CD tool itself (uses CodePipeline under the hood)
+- EXAM TRAP: Blue/Green uses TWO full environments — costs double during deploy
+- EXAM TRAP: CodeBuild compute types: Lambda compute available for short builds (cheaper); managed EC2 for long
+
+Key Decision Matrix
+
+  Scenario                                                      Pick
+  ------------------------------------------------------------- ----------------------
+  YAML IaC                                                      CloudFormation
+  Code IaC (TypeScript, Python)                                 CDK
+  Lambda-focused IaC                                            SAM
+  Multi-account multi-Region template deploy                    StackSets
+  Pipeline orchestration source-to-deploy                       CodePipeline
+  Managed build environment                                     CodeBuild
+  Blue/green for ECS / Lambda                                   CodeDeploy
+  Private npm / PyPI packages                                   CodeArtifact
+  Automated PR code review                                      CodeGuru Reviewer
+  Production performance profiling                              CodeGuru Profiler
+  Source code security scan                                     CodeGuru Security
+  Vending compliant templates to dev teams                      Service Catalog
+  Platform engineering with versioned env + service templates   Proton
+  Zero-downtime deployment                                      Blue/Green or Canary
+  Incremental rollout by percentage                             Linear deployment
+
+Tone & Style
+
+- Lead with CloudFormation (most-tested)
+- For deployment strategies, walk through with concrete percentages
+- Mention CDK as the modern IaC choice without abandoning CFN underneath
+
+Rapid-Fire Closer
+
+“YAML IaC?” — “CloudFormation.” “Code IaC?” — “CDK.” “Multi-account templates?” — “StackSets.” “Lambda blue/green?” — “CodeDeploy with alias + traffic shift.” “Private npm?” — “CodeArtifact.” “ML code review?” — “CodeGuru Reviewer.”
