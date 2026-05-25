@@ -1,0 +1,96 @@
+# Podcast 28 — Cost Management
+
+**Length target**: 15 min
+**Repo references**: `domain-1-organizational/37-cost-explorer.md`, `38-cost-anomaly-detection.md`, `39-trusted-advisor.md`, `44-budgets.md`, `45-savings-plans.md`, `46-cost-and-usage-report.md`, `domain-2-new-solutions/03-compute-optimizer.md`
+
+## Topic & Scope
+
+Cost Explorer, Budgets, Cost Anomaly Detection, Cost and Usage Report, Trusted Advisor, Compute Optimizer. Plus a Savings Plans recap. Cost questions weigh ~10% of SAP-C02.
+
+## Service Coverage Depth
+
+**Deep**:
+- Cost Explorer — historical + forecast + RI/SP recommendations
+- Budgets — thresholds + Budget Actions (auto-remediation)
+- Cost Anomaly Detection — ML-based anomaly alerts
+- CUR — raw billing data
+- Trusted Advisor — recommendations across cost / perf / fault tolerance / security / service limits
+- Compute Optimizer — right-sizing for EC2 / ASG / EBS / Lambda / ECS Fargate
+
+**Brief**:
+- Savings Plans recap (covered fully in podcast 13)
+- Cost Categories + Cost Allocation Tags
+
+## Structured Outline
+
+1. **Open (30s)** — "Cost levers are: visibility, control, optimization. Six services do the heavy lifting."
+2. **Cost Explorer (2.5 min)** — interactive historical analysis, group by service/tag/account/region, forecast, SP/RI recommendations, Cost Optimization Hub
+3. **Budgets (2.5 min)** — types (cost/usage/RI utilization/SP utilization/coverage), forecasted vs actual alerts, Budget Actions (SCP / IAM / stop EC2/RDS / EventBridge), Budgets Reports
+4. **Cost Anomaly Detection (2 min)** — ML-based, monitors per service / linked account / cost category / tag, alerts via SNS / email
+5. **Cost and Usage Report (2 min)** — most granular line-item data to S3, Athena/QuickSight integration, cost allocation tags must be activated
+6. **Trusted Advisor (2 min)** — 5 categories: Cost / Performance / Fault Tolerance / Security / Service Limits, Business+ unlocks full checks
+7. **Compute Optimizer (1.5 min)** — ML-based right-sizing for EC2 / ASG / EBS / Lambda / ECS on Fargate
+8. **Savings Plans recap (1 min)** — Compute SP (EC2 + Fargate + Lambda) vs EC2 Instance SP vs SageMaker SP; 1y/3y; All/Partial/No Upfront
+9. **Rapid-Fire Trap Drill (60s)**
+
+## Must-Mention Exam Tips
+
+- Cost Explorer: 12-month historical + 12-month forecast, free
+- Cost Explorer Resource-level granularity for last 14 days
+- Cost Optimization Hub: aggregated savings recommendations
+- Budgets: alerts at forecasted OR actual threshold; up to 5 alerts/budget
+- Budget Actions: IAM policy / SCP / stop EC2 / stop RDS / EventBridge target
+- First 2 budgets free; $0.02 per budget per day after
+- Cost Anomaly Detection: ML detects unusual spend; no threshold needed
+- CUR: most detailed data; refresh up to 3×/day; CUR 2.0 via Data Exports
+- Cost Allocation Tags must be ACTIVATED to appear in CUR + Cost Explorer reports
+- Trusted Advisor 5 categories: Cost / Performance / Fault Tolerance / Security / Service Limits
+- Trusted Advisor Basic + Developer plan: only 7 core checks; Business+ unlocks full set
+- Compute Optimizer: needs 14 days of CloudWatch data for recommendations
+- Compute Optimizer covers: EC2, ASG, EBS, Lambda (memory), ECS on Fargate, RDS (limited)
+- Savings Plans: Compute SP (most flexible, EC2+Fargate+Lambda, up to 66%), EC2 Instance SP (one family in one Region, up to 72%), SageMaker SP
+- RIs still needed for RDS, ElastiCache, Redshift, OpenSearch, DynamoDB (DynamoDB Reserved Capacity)
+
+## Must-Mention Exam Traps
+
+- EXAM TRAP: Cost Explorer is RETROSPECTIVE; Budgets is PROACTIVE — different tools
+- EXAM TRAP: Cost Anomaly Detection uses ML — no fixed threshold; complements Budgets, doesn't replace
+- EXAM TRAP: Budget Actions can stop EC2 / RDS — but applies the role's permissions; scope tightly
+- EXAM TRAP: Tags don't appear in CUR / Cost Explorer unless ACTIVATED in Billing
+- EXAM TRAP: Historical tag data is lost if you activate tag late — only forward-looking
+- EXAM TRAP: CUR is generated FROM management account — linked accounts see summary
+- EXAM TRAP: Trusted Advisor full checks need Business+ plan
+- EXAM TRAP: Trusted Advisor Service Limits checks — but Service Quotas is more precise
+- EXAM TRAP: Compute Optimizer needs 14 days of metrics — new workloads not eligible
+- EXAM TRAP: Savings Plans do NOT cover RDS / ElastiCache / Redshift — must use RIs
+- EXAM TRAP: SP and RI sharing across Org is ON by default
+- EXAM TRAP: Compute SP covers Lambda — easy to forget
+- EXAM TRAP: Free tier covers small Compute Optimizer / Cost Explorer / Budgets use
+- EXAM TRAP: Athena query on CUR scans whole file without partition pruning — costly
+
+## Key Decision Matrix
+
+| Need | Pick |
+|---|---|
+| Interactive historical cost analysis + forecast | Cost Explorer |
+| Threshold alert + auto-action | Budgets |
+| ML-based unusual spend detection | Cost Anomaly Detection |
+| Custom dashboards on raw billing data | CUR → Athena → QuickSight |
+| Best-practice recommendations (cost + perf + security) | Trusted Advisor |
+| Right-size EC2 / Lambda / EBS | Compute Optimizer |
+| Discount for EC2 + Fargate + Lambda | Compute Savings Plan |
+| Discount for one EC2 family steady state | EC2 Instance Savings Plan |
+| Discount for RDS / ElastiCache / Redshift | Reserved Instances |
+| Discount for DynamoDB | DynamoDB Reserved Capacity |
+| Track cost per team / product | Cost Allocation Tags + Cost Categories |
+| Auto-stop EC2 when budget breached | Budgets + Budget Action |
+
+## Tone & Style
+
+- Frame as "visibility → control → optimize"
+- Repeat "Cost Explorer retrospective, Budgets proactive"
+- For Savings Plans, recap one-liner: "Compute SP for new modern workloads, EC2 Instance SP for locked-in"
+
+## Rapid-Fire Closer
+
+"Threshold alert?" — "Budgets." "ML anomaly?" — "Cost Anomaly Detection." "Raw billing data?" — "CUR." "Right-size EC2?" — "Compute Optimizer." "Best-practice checks?" — "Trusted Advisor." "RDS discount?" — "RI (NOT Savings Plan)."

@@ -1,0 +1,103 @@
+# Podcast 30 — IoT, End-User Computing & Niche
+
+**Length target**: 15 min
+**Repo references**: `domain-2-new-solutions/23-aws-iot.md`, `domain-1-organizational/42-workspaces.md`, `domain-2-new-solutions/40-amplify.md`, `46-pinpoint.md`, `47-device-farm.md`, `37-other-services.md` (Connect), `49-niche-services.md`
+
+## Topic & Scope
+
+Final cleanup: IoT family (Core / Greengrass / SiteWise / Device Defender / Device Management), end-user computing (WorkSpaces / AppStream / WorkSpaces Web), modernization tooling (Amplify, Pinpoint, Device Farm, Connect), and the niche distractors (Managed Blockchain, Elastic Transcoder).
+
+## Service Coverage Depth
+
+**Brief — "what it does + when to pick"**:
+- IoT Core (MQTT broker + rules engine)
+- Greengrass (edge runtime)
+- SiteWise (industrial telemetry)
+- Device Defender (IoT security)
+- Device Management (fleet ops)
+- WorkSpaces (VDI)
+- AppStream 2.0 (streamed app)
+- WorkSpaces Web (browser isolation)
+- Amplify (full-stack hosting + backend)
+- Pinpoint (multi-channel marketing engagement)
+- Device Farm (mobile testing)
+- Amazon Connect (call center)
+- Managed Blockchain (distractor)
+- Elastic Transcoder (legacy distractor)
+
+## Structured Outline
+
+1. **Open (30s)** — "Final podcast: IoT, end-user computing, modernization specialties, and the distractor cluster. None of these need deep coverage — but you need to recognize which one fits each scenario."
+2. **IoT Family (4 min)** — IoT Core (MQTT broker + rules engine + device shadow), Greengrass (run Lambda/containers at edge devices), SiteWise (industrial OPC UA / Modbus telemetry + dashboards), Device Defender (audit + detect anomalies), Device Management (fleet provisioning + OTA updates)
+3. **End-User Computing (3 min)** — WorkSpaces (persistent VDI), AppStream 2.0 (streamed single app, no full desktop), WorkSpaces Web (browser isolation)
+4. **Modernization Specialties (4 min)** — Amplify (full-stack hosting + Cognito/AppSync/DynamoDB backend), Pinpoint (multi-channel marketing campaigns), Device Farm (real mobile devices for testing), Amazon Connect (cloud call center)
+5. **Niche Distractors (2.5 min)** — Managed Blockchain (Hyperledger / Ethereum), Elastic Transcoder (legacy — MediaConvert is the modern answer), IoT Things Graph (deprecated)
+6. **Rapid-Fire Trap Drill (60s)**
+
+## Must-Mention Exam Tips
+
+- IoT Core: MQTT broker, device registry, device shadow (last-known state), rules engine (route to Lambda/S3/Kinesis/DynamoDB)
+- IoT Greengrass: run Lambda + containers + ML at the edge, sync with cloud, offline operation
+- IoT SiteWise: industrial telemetry, OPC UA / Modbus / EtherNet/IP, asset models, dashboards
+- IoT Device Defender: audit IoT policies, detect anomalies (cert sharing, traffic patterns)
+- IoT Device Management: fleet provisioning + OTA firmware updates + grouping
+- WorkSpaces: persistent desktops (Windows / Linux), needs Directory Service, hourly or monthly billing
+- WorkSpaces Pools: ephemeral non-persistent desktops
+- AppStream 2.0: streamed single application (e.g., AutoCAD)
+- WorkSpaces Web: browser isolation for SaaS access
+- Amplify Hosting: CI/CD from Git, PR previews, SSR support, CloudFront-backed
+- Amplify Backend (Gen 2): TypeScript schema generates Cognito + AppSync + DynamoDB
+- Pinpoint: multi-channel (email + SMS + push + voice + in-app), journeys, segmentation, analytics
+- Pinpoint vs SES: Pinpoint is segmented marketing; SES is transactional at scale (cheaper for bulk transactional)
+- Device Farm: real iOS / Android devices + desktop browsers, Appium / XCUITest / Selenium
+- Amazon Connect: cloud call center, contact flows, integrates with Lex bots
+- Managed Blockchain: Hyperledger Fabric + Ethereum networks, multi-party ledger
+- Elastic Transcoder: legacy video conversion — for new workloads use MediaConvert
+- IoT Things Graph: deprecated — rarely the right answer
+
+## Must-Mention Exam Traps
+
+- EXAM TRAP: IoT Core ≠ IoT Greengrass — Core is cloud broker; Greengrass is edge runtime
+- EXAM TRAP: SiteWise is INDUSTRIAL (OPC UA, Modbus) — not consumer IoT
+- EXAM TRAP: WorkSpaces requires Directory Service (Managed AD, AD Connector, or Simple AD)
+- EXAM TRAP: AppStream 2.0 = single app stream, NOT full desktop
+- EXAM TRAP: WorkSpaces Web is browser-only, NOT a full desktop
+- EXAM TRAP: Amplify is for full-stack apps — Beanstalk for server-based PaaS, App Runner for containers
+- EXAM TRAP: Pinpoint ≠ SES — SES is transactional email at scale (cheaper); Pinpoint is multi-channel marketing with analytics
+- EXAM TRAP: Pinpoint ≠ SNS — SNS is generic pub/sub; Pinpoint is engagement platform
+- EXAM TRAP: Amazon Connect ≠ Pinpoint — Connect is contact center voice/chat; Pinpoint is outbound marketing
+- EXAM TRAP: Device Farm ≠ CloudWatch Synthetics — Device Farm is pre-release mobile QA; Synthetics is production probes
+- EXAM TRAP: Managed Blockchain is rarely the right answer in SAP-C02 — usually a distractor unless explicit multi-party ledger requirement
+- EXAM TRAP: Elastic Transcoder is LEGACY — when MediaConvert is also offered, pick MediaConvert
+- EXAM TRAP: IoT Events / IoT Analytics / IoT Things Graph being deprecated or end-of-support — don't pick for new designs
+- EXAM TRAP: QLDB is closed to new customers — for append-only audit use DynamoDB with versioning or CloudTrail + S3 Object Lock
+
+## Key Decision Matrix
+
+| Scenario | Pick |
+|---|---|
+| MQTT broker + device shadow + rules | IoT Core |
+| Run Lambda at edge devices, offline-tolerant | IoT Greengrass |
+| Industrial telemetry (OPC UA / Modbus) | IoT SiteWise |
+| IoT security audit + anomaly detection | IoT Device Defender |
+| IoT fleet provisioning + OTA updates | IoT Device Management |
+| Persistent virtual desktop | WorkSpaces |
+| Stream one app to many users | AppStream 2.0 |
+| Browser isolation for SaaS access | WorkSpaces Web |
+| Full-stack web/mobile app with CI/CD + backend | Amplify |
+| Marketing campaign multi-channel + segmentation | Pinpoint |
+| Bulk transactional email at scale | SES (NOT Pinpoint) |
+| Cloud call center with voice + chat | Amazon Connect |
+| Test mobile app on real devices | Device Farm |
+| Multi-party Hyperledger / Ethereum | Managed Blockchain |
+| Modern video transcoding | MediaConvert (NOT Elastic Transcoder) |
+
+## Tone & Style
+
+- Each service gets a one-sentence definition + one use case
+- Frame the distractor section explicitly: "These show up as wrong answers — recognize and skip"
+- Repeat "Pinpoint vs SES" since it's a recurring confusion
+
+## Rapid-Fire Closer
+
+"MQTT broker?" — "IoT Core." "Edge Lambda?" — "Greengrass." "Stream one app?" — "AppStream." "Marketing campaigns?" — "Pinpoint." "Bulk transactional email?" — "SES." "Call center?" — "Connect." "Hyperledger?" — "Managed Blockchain." "Mobile device testing?" — "Device Farm."

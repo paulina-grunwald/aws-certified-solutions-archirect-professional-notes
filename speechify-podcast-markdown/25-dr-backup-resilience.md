@@ -1,0 +1,94 @@
+# Podcast 25 — DR, Backup & Resilience
+
+**Length target**: 15 min
+**Repo references**: `domain-3-continuous-improvement/01-disaster-recovery.md`, `02-aws-drs.md`, `04-resilience-hub.md`, `05-fault-injection-service.md`, `domain-2-new-solutions/22-aws-backup.md`
+
+## Topic & Scope
+
+Four DR strategies on the RTO/RPO/cost spectrum, AWS Backup (centralized backup), DRS (Elastic Disaster Recovery), Resilience Hub (assessment), FIS (chaos testing). Heavy SAP-C02 weight.
+
+## Service Coverage Depth
+
+**Deep**:
+- DR strategies: Backup & Restore / Pilot Light / Warm Standby / Multi-Site Active-Active
+- AWS Backup — central policies, cross-Region + cross-account, Backup Vault Lock
+- AWS Elastic Disaster Recovery (DRS)
+- Resilience Hub — assessment + score against RTO/RPO policy
+- AWS FIS — chaos engineering
+
+**Brief**:
+- Route 53 Application Recovery Controller (ARC)
+
+## Structured Outline
+
+1. **Open (30s)** — "DR is the bread-and-butter of SAP-C02. Four strategies on a cost spectrum — pick the cheapest that meets the RTO/RPO."
+2. **Four DR Strategies (4 min)** — Backup & Restore (RTO hours, cheapest), Pilot Light (RTO 10s of min, minimal infra hot), Warm Standby (RTO minutes, scaled-down full), Multi-Site Active-Active (RTO seconds, full cost)
+3. **AWS Backup (3 min)** — central backup policies, supports EC2/EBS/RDS/Aurora/DynamoDB/EFS/FSx/Storage Gateway/Neptune/DocumentDB, Backup Vault Lock (WORM), cross-Region + cross-account, Backup Audit Manager
+4. **AWS DRS (2 min)** — agent-based continuous block-level replication, RPO seconds RTO minutes, replaces CloudEndure DR, non-disruptive drills + failback
+5. **Resilience Hub + FIS (3 min)** — Resilience Hub assesses against RTO/RPO policy + generates FIS templates; FIS injects faults (terminate EC2, AZ outage, RDS failover) with CloudWatch alarm stop conditions
+6. **Route 53 ARC (1 min)** — readiness checks + routing controls for active-passive cluster
+7. **Rapid-Fire Trap Drill (60s)**
+
+## Must-Mention Exam Tips
+
+- Backup & Restore: cheapest, RTO/RPO hours — for non-critical workloads
+- Pilot Light: minimal core infra always running (DB replicated, app servers off) — RTO/RPO minutes to hours
+- Warm Standby: scaled-down full stack always running, scale up on failover — RTO minutes
+- Multi-Site Active-Active: full production in two Regions, active simultaneously — RTO seconds, highest cost
+- Pick the cheapest strategy that meets your RTO/RPO
+- AWS Backup supports: EC2, EBS, RDS, Aurora, DynamoDB, EFS, FSx (all flavors), Storage Gateway, Neptune, DocumentDB, S3, Redshift, Timestream
+- Backup plans: rules (frequency, retention, cold storage, copy to other Region/account)
+- Backup Vault Lock: WORM immutability (compliance + governance modes — Compliance is unmodifiable)
+- AWS Backup integrates with Organizations for org-wide policies
+- AWS DRS: continuous block-level replication from on-prem / other clouds / EC2 into AWS, RPO seconds
+- DRS non-disruptive drills create isolated test instances
+- Resilience Hub: policies define RTO/RPO per disruption category (software, hardware, AZ, Region)
+- Resilience Hub recommendations include FIS templates + SOPs + alarms
+- FIS: chaos engineering, action-target-stop condition model
+- FIS pre-built scenarios: AZ power interruption, cross-region disruption
+- Route 53 ARC: readiness checks + routing controls for active-passive cluster of cells
+- Cross-Region patterns: Aurora Global, DynamoDB Global Tables, S3 CRR, Route 53 failover
+
+## Must-Mention Exam Traps
+
+- EXAM TRAP: Cheapest DR strategy that meets RTO/RPO — don't over-engineer
+- EXAM TRAP: Pilot Light has DB always replicating, but compute is OFF — not just "infrastructure ready"
+- EXAM TRAP: Warm Standby is "scaled-down running" — needs scaling up at failover (still has scale-up time)
+- EXAM TRAP: AWS Backup is the central tool — but specific services have their own (RDS snapshots, EBS snapshots) and AWS Backup wraps them
+- EXAM TRAP: Backup Vault Lock COMPLIANCE mode is irreversible — even by root user
+- EXAM TRAP: AWS DRS replaces CloudEndure DR (rebranded)
+- EXAM TRAP: DRS requires agent on source server — agentless is NOT supported
+- EXAM TRAP: Resilience Hub does NOT run failure tests itself — it generates FIS templates; FIS runs them
+- EXAM TRAP: FIS terminate actions are NOT reversible — plan for recovery
+- EXAM TRAP: FIS stop conditions are CloudWatch alarms — without them, runaway experiments
+- EXAM TRAP: Route 53 ARC routing controls are separate from health checks — controls override health
+- EXAM TRAP: Aurora Global Database secondaries are READ-ONLY until failover
+- EXAM TRAP: DynamoDB Global Tables are multi-MASTER — different from Aurora Global Database (one writer)
+- EXAM TRAP: Pilot Light scales up time = launch + DB promote + warm-up — quantify before committing
+
+## Key Decision Matrix
+
+| Scenario | Pick |
+|---|---|
+| RTO hours, lowest cost | Backup & Restore |
+| RTO ~30 min, DB hot, app cold | Pilot Light |
+| RTO minutes, scaled-down running | Warm Standby |
+| RTO seconds, both Regions live | Multi-Site Active-Active |
+| Centralized backup with policy | AWS Backup |
+| Immutable backup for compliance | Backup Vault Lock Compliance mode |
+| Block-level replication on-prem → AWS | AWS DRS |
+| Score architecture against RTO/RPO target | Resilience Hub |
+| Chaos test: terminate instances, AZ outage | AWS FIS |
+| Active-passive routing with explicit controls | Route 53 ARC |
+| Multi-Region SQL writer | Aurora Global Database |
+| Multi-Region multi-master KV | DynamoDB Global Tables |
+
+## Tone & Style
+
+- Order strategies cheapest-to-most-expensive
+- Repeat "pick cheapest that meets RTO/RPO"
+- For FIS, name the stop condition mantra
+
+## Rapid-Fire Closer
+
+"Cheapest DR?" — "Backup & Restore." "DB hot, app cold?" — "Pilot Light." "Scaled-down running?" — "Warm Standby." "Both live?" — "Active-Active." "Block replication?" — "DRS." "Score against RTO/RPO?" — "Resilience Hub." "Chaos test?" — "FIS."
