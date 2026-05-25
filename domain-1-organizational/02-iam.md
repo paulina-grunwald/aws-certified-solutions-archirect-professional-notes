@@ -231,7 +231,7 @@ Example: deny sensitive actions unless MFA was authenticated within last hour:
 }
 ```
 
-### FIDO2 Passkeys (June 2024)
+### FIDO2 Passkeys
 
 AWS supports **phishing-resistant MFA** via FIDO2.
 
@@ -241,7 +241,7 @@ AWS supports **phishing-resistant MFA** via FIDO2.
 - Phishing-resistant — cryptographic origin binding
 - Works for console sign-in (not programmatic API calls)
 
-### Root MFA Enforcement (2024–2025)
+### Root MFA Enforcement
 
 - All AWS account types require MFA on the root user for console access
 - Member accounts must register MFA within **35 days** of first console sign-in (unless centralized root access is enabled)
@@ -252,7 +252,7 @@ AWS supports **phishing-resistant MFA** via FIDO2.
 
 ## Centralized Root Access Management
 
-Launched 2024–2025; part of AWS Organizations.
+Part of AWS Organizations.
 
 - **Centrally manage and disable root credentials** across all member accounts from the management account
 - **Remove root credentials** from member accounts entirely
@@ -270,7 +270,7 @@ Launched 2024–2025; part of AWS Organizations.
 
 ## IAM Roles Anywhere
 
-Launched 2022. Lets on-premises and hybrid workloads use IAM roles **without long-term access keys**.
+Lets on-premises and hybrid workloads use IAM roles **without long-term access keys**.
 
 Authentication via **X.509 certificates** issued by a Certificate Authority (CA).
 
@@ -291,13 +291,13 @@ Authentication via **X.509 certificates** issued by a Certificate Authority (CA)
 
 > 💡 **Exam pattern**: on-prem workloads need AWS access **without long-term credentials** → **IAM Roles Anywhere**.
 
-As of 2026, supports post-quantum cryptography (FIPS 204 / ML-DSA).
+Supports post-quantum cryptography (FIPS 204 / ML-DSA).
 
 ---
 
 ## IAM Access Analyzer
 
-Three analyzer types since 2024.
+Three analyzer types.
 
 ### 1. External Access Analyzer (original)
 
@@ -305,7 +305,7 @@ Three analyzer types since 2024.
 - Zone of trust = your account or your Organization
 - **Free**
 
-### 2. Unused Access Analyzer (2023 GA, expanded 2024)
+### 2. Unused Access Analyzer
 
 - Identifies **unused IAM roles, access keys, passwords, and permissions**
 - Finds:
@@ -315,7 +315,7 @@ Three analyzer types since 2024.
   - Unused permissions (granted actions never invoked)
 - **Paid per analyzer per month**
 
-### 3. Internal Access Analyzer (2024)
+### 3. Internal Access Analyzer
 
 - Identifies resources shared **within your organization** across accounts
 - Surfaces unintended internal cross-account access
@@ -425,7 +425,7 @@ Modern recommended approach for human access to AWS at scale.
 - Joiner / leaver / mover events propagate
 - Required for production federations at enterprise scale
 
-### Multi-Region Replication (2024)
+### Multi-Region Replication
 
 - Replicate Identity Center instance across multiple Regions for resilience + low latency
 - One primary Region, multiple read-only replicas
@@ -485,7 +485,7 @@ Modern recommended approach for human access to AWS at scale.
 ### S3 ACLs
 
 - Legacy; AWS recommends bucket policies + IAM policies
-- Disabled by default since April 2023 (Object Ownership = Bucket owner enforced)
+- Disabled by default (Object Ownership = Bucket owner enforced)
 
 ### S3 Access Points
 
@@ -607,7 +607,7 @@ Resource-based policy on a VPC endpoint that controls which API calls can be mad
 - Use **Regional STS endpoints** for production — the global endpoint has a single-Region (us-east-1) failure mode
 - Use **instance profiles** for EC2 — never store access keys on instances
 - Cognito User Pools handle **sign-in (JWT)**; Identity Pools **exchange tokens for AWS temp creds** — they are different services
-- The current name is **AWS IAM Identity Center** (renamed 2022) — "AWS SSO" is the old name
+- The current name is **AWS IAM Identity Center** (renamed) — "AWS SSO" is the old name
 - Virtual MFA (TOTP) is **not phishing-resistant** — use FIDO2 passkeys or hardware security keys instead
 - `aws:SourceIp` **does not work for VPC endpoint traffic** — use `aws:VpcSourceIp` or `aws:SourceVpce` instead
 - Service-linked role deletion can **fail if dependencies exist** — the service returns a list of blocking dependencies that must be cleaned up first

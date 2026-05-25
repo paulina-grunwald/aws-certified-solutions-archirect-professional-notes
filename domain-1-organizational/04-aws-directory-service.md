@@ -47,14 +47,14 @@ Managed service that provides **AD domain controllers (DCs) running on Windows s
 - Large enterprises
 - Higher cost; larger storage
 
-### Hybrid Edition (launched August 2025)
+### Hybrid Edition
 
 - AWS Managed Microsoft AD DCs **join your existing on-prem AD forest** — they become part of your existing AD
 - **Unified directory experience** — single forest, single set of users/groups across on-prem + AWS
 - No need to set up forest trusts
 - Best for "lift and extend" scenarios where you want AWS to act as additional DCs in your existing forest
 
-> 💡 **API-driven edition upgrades** (October 2025): upgrade from Standard → Enterprise via API without downtime. Downgrade is not supported.
+> 💡 **API-driven edition upgrades**: upgrade from Standard → Enterprise via API without downtime. Downgrade is not supported.
 
 **Extending AD on-prem (without Hybrid Edition)**: use **AD Trust** (forest trust over VPN / Direct Connect) if you want to keep separate forests but allow cross-forest authentication.
 
@@ -138,7 +138,7 @@ Managed service that provides **AD domain controllers (DCs) running on Windows s
 | Scenario                                                            | Best Service                                                       |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | Run full Microsoft AD in AWS, no on-prem                            | AWS Managed Microsoft AD (Standard or Enterprise)                  |
-| Extend existing on-prem AD into AWS as additional DCs (same forest) | AWS Managed Microsoft AD (**Hybrid Edition**, 2025)                |
+| Extend existing on-prem AD into AWS as additional DCs (same forest) | AWS Managed Microsoft AD (**Hybrid Edition**)                      |
 | Keep on-prem AD as source of truth, no directory in AWS             | AD Connector                                                       |
 | Simple AD-compatible directory in AWS, no on-prem                   | Simple AD                                                          |
 | WorkSpaces / WorkMail / Identity Center with on-prem AD             | Managed Microsoft AD + **two-way forest trust**                    |
@@ -184,7 +184,7 @@ Managed service that provides **AD domain controllers (DCs) running on Windows s
 ## Exam Tips
 
 - **AWS Managed Microsoft AD** is the most exam-relevant flavor — know the three editions (Standard 5K users, Enterprise 500K objects, Hybrid for same-forest extension)
-- **Hybrid Edition (Aug 2025)** is new — when the scenario says "extend on-prem AD into AWS as part of the same forest with unified experience," it's Hybrid Edition (not a trust)
+- **Hybrid Edition** — when the scenario says "extend on-prem AD into AWS as part of the same forest with unified experience," it's Hybrid Edition (not a trust)
 - **Two-way forest trust** is required for AWS apps that look up users from on-prem (Identity Center, WorkSpaces, WorkMail, WorkDocs, Chime, Connect, QuickSight, console federation)
 - **One-way trust** is sufficient for EC2, RDS, FSx domain join
 - **AD Connector** = proxy only; no directory data stored in AWS. Use when on-prem AD must remain system of record.
@@ -211,4 +211,4 @@ Managed service that provides **AD domain controllers (DCs) running on Windows s
 - Simple AD has **limited service compatibility** for seamless domain join — check compatibility before choosing it
 - Cognito User Pools is **app-level sign-in (B2C)** — it is not a directory service and lives outside Directory Service entirely
 - AD Connector requires a **reliable, low-latency network** to on-prem — high latency or outages break authentication for AWS resources
-- AWS Managed Microsoft AD editions can only be **upgraded** (Standard to Enterprise via API, as of October 2025) — downgrade is not supported
+- AWS Managed Microsoft AD editions can only be **upgraded** (Standard to Enterprise via API) — downgrade is not supported

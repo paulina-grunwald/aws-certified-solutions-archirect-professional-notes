@@ -62,7 +62,7 @@ Maps to: **Domain 1.2 — Prescribe security controls** (multi-account identity,
 
 ---
 
-## Multi-Region Replication (2024)
+## Multi-Region Replication
 
 - Replicate Identity Center instance across multiple Regions for **resilience + low latency** for globally distributed workforce
 - **One primary Region**, multiple **read-only replicas**
@@ -88,7 +88,7 @@ Maps to: **Domain 1.2 — Prescribe security controls** (multi-account identity,
 ### Other Properties
 
 - **Session duration**: configurable per permission set, 1–12 hours (default 1 hour)
-- **Block usage via SCP**: as of June 2025, you can use an Organizations SCP to **block specific permission sets** from being used in member accounts
+- **Block usage via SCP**: use an Organizations SCP to **block specific permission sets** from being used in member accounts
 
 ---
 
@@ -104,7 +104,7 @@ Propagate a user's **workforce identity** from the IdP all the way to data and a
 
 - **Amazon Q Business** (workforce assistant)
 - **Amazon QuickSight** (BI dashboards)
-- **Amazon Redshift** (data warehouse — including Redshift Data API as of March 2025)
+- **Amazon Redshift** (data warehouse — including Redshift Data API)
 - **Amazon EMR** (big data)
 - **AWS Lake Formation** (fine-grained data lake permissions)
 - **Amazon S3 Access Grants** (per-user S3 access)
@@ -147,7 +147,7 @@ Propagate a user's **workforce identity** from the IdP all the way to data and a
 
 - Default access portal URL: `https://d-xxxxxxxxxx.awsapps.com/start`
 - Can configure a **custom subdomain**: `https://yourcompany.awsapps.com/start`
-- **Vanity domain support** (2024+): use your own DNS domain (e.g., `https://signin.yourcompany.com`) via the Identity Center custom domain feature
+- **Vanity domain support**: use your own DNS domain (e.g., `https://signin.yourcompany.com`) via the Identity Center custom domain feature
 - Improves user experience and brand consistency
 
 ---
@@ -218,7 +218,7 @@ Propagate a user's **workforce identity** from the IdP all the way to data and a
 
 ## Exam Traps
 
-- The current name is **AWS IAM Identity Center** (renamed 2022) — "AWS SSO" is the old name. If the question mentions AWS SSO, it means IAM Identity Center
+- The current name is **AWS IAM Identity Center** (renamed) — "AWS SSO" is the old name. If the question mentions AWS SSO, it means IAM Identity Center
 - You pick **one identity source per instance** — switching loses existing assignments. Multi-IdP per instance is not supported
 - Identity Center is for **workforce users (B2E)**; Cognito is for **app users (B2C)** — they serve different audiences
 - Permission sets are **reusable templates** — when assigned to a new account, Identity Center automatically creates the corresponding IAM role with the `AWSReservedSSO_*` prefix. They are not unique roles

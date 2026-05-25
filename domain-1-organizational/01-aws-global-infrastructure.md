@@ -143,7 +143,7 @@ ARNs include the partition: `arn:aws:s3:::bucket` vs `arn:aws-us-gov:s3:::bucket
 | Latency-sensitive compute in a specific city   | **Local Zones**                     |
 | Latency-sensitive compute on 5G                | **Wavelength Zones**                |
 | Workloads on customer premises                 | **Outposts**                        |
-| Global anycast DNS resolver                    | **Route 53 Global Resolver** (2026) |
+| Global anycast DNS resolver                    | **Route 53 Global Resolver**        |
 
 ---
 
