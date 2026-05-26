@@ -25,7 +25,7 @@ The well-architected, multi-account environment that Control Tower sets up for y
 - **Flexible Organization Structure** — removes previous mandatory OU structure requirements
 - **ConfigBaseline** — new baseline type for detective controls support without requiring the full AWSControlTowerBaseline
 
-Available in **European Sovereign Cloud** (Jan 2026).
+Available in **European Sovereign Cloud**.
 
 ---
 

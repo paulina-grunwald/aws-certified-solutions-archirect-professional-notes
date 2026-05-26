@@ -103,7 +103,7 @@ An encrypted set of VPN tunnels from the Outpost back to its **parent AWS Region
 
 ---
 
-## EKS Local Clusters on Outposts (2022+)
+## EKS Local Clusters on Outposts
 
 - Run a full **Kubernetes control plane locally** on Outposts Rack (not just worker nodes)
 - **Survives temporary service link disconnection** — EKS cluster keeps operating during Region disconnection

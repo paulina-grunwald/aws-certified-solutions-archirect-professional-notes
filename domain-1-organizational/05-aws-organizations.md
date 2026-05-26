@@ -489,7 +489,7 @@ Create custom billing groups to model billing scenarios (e.g., showback/chargeba
 - **OrganizationAccountAccessRole** is auto-created for accounts **created** via Organizations, but **manually created** for **invited** accounts
 - **CUR nuances**: management CUR has all data, member CUR has only its own; leaving the org means losing Cost Explorer history
 - **Tag policies** = tag standards; **SCPs** = service usage; **backup policies** = backup plans — know the mapping
-- **Direct account transfers** (Nov 2025) — "migrate an account to a different organization with minimal disruption" → direct transfer, no standalone step needed
+- **Direct account transfers** — "migrate an account to a different organization with minimal disruption" → direct transfer, no standalone step needed
 
 ---
 

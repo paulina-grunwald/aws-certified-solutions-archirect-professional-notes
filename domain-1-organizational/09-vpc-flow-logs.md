@@ -65,23 +65,23 @@ Flow logs can be created at three levels:
 - **`type`** — IPv4, IPv6, or EFA
 - **`pkt-srcaddr` / `pkt-dstaddr`** — original packet-level source/destination (different from `srcaddr`/`dstaddr` when traffic goes through NAT GW, NLB, or proxies)
 
-### Version 4 (2020 — location fields)
+### Version 4 (location fields)
 
 - **`region`**, **`az-id`**, **`sublocation-type`**, **`sublocation-id`** — for Outposts / Local Zones / Wavelength workloads
 
-### Version 5 (2021 — AWS service + path)
+### Version 5 (AWS service + path)
 
 - **`pkt-src-aws-service` / `pkt-dst-aws-service`** — identifies AWS service (e.g., S3, EC2) at the packet endpoint
 - **`flow-direction`** — `ingress` or `egress`
 - **`traffic-path`** — the path egress traffic takes (IGW, NAT GW, VGW, VPC peering, TGW, Gateway Endpoint, etc.)
 
-### Version 7 (May 2024 — ECS metadata)
+### Version 7 (ECS metadata)
 
 - **`ecs-cluster-name`**, **`ecs-cluster-arn`**, **`ecs-service-name`**
 - **`ecs-task-id`**, **`ecs-task-arn`**, **`ecs-task-definition-arn`**
 - **`ecs-container-id`**, **`ecs-second-container-id`**, **`ecs-container-instance-id`**, **`ecs-container-instance-arn`**
 
-### Version 8 (2025 — reject reason)
+### Version 8 (reject reason)
 
 - **`reject-reason`** — explains **why** a packet was REJECTed (e.g., `BPA` for Block Public Access on internet gateways, `unknown` for other reject paths)
 - Custom format auto-sets `version` to the highest field used — including `reject-reason` bumps records to V8
@@ -159,7 +159,7 @@ Flow logs can be created at three levels:
 
 ---
 
-## VPC Flow Logs for ECS (Version 7, May 2024)
+## VPC Flow Logs for ECS (Version 7)
 
 - New ECS metadata fields enrich flows from tasks running on EC2 or Fargate
 - Enable via console checkbox or `IncludeECSMetadata` option in custom format
@@ -190,7 +190,7 @@ Flow logs can be created at three levels:
 - For **TGW central inspection** scenarios → consider **TGW Flow Logs**, a separate feature
 - Flow Logs are enabled per-resource; use **SCPs + AWS Config rules** to enforce them org-wide
 - **Default format = V2 fields only** — use custom format to capture V3+ fields (`vpc-id`, `instance-id`, `pkt-srcaddr`, ECS metadata, `reject-reason`, etc.)
-- **V8 `reject-reason` (2025)** tells you WHY a packet was rejected (e.g., `BPA` for Block Public Access) — distinguish SG/NACL drops from BPA drops
+- **V8 `reject-reason`** tells you WHY a packet was rejected (e.g., `BPA` for Block Public Access) — distinguish SG/NACL drops from BPA drops
 
 ---
 

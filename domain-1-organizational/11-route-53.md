@@ -43,7 +43,7 @@ Maps to: **Domain 1.1 — Architect network connectivity strategies** (DNS / glo
 | Record type | A or AAAA | CNAME |
 | TTL | Set by Route 53 automatically | Configurable |
 
-**Alias targets supported**: ELB, CloudFront, API Gateway, Elastic Beanstalk, S3 website endpoints, VPC Interface Endpoints, Global Accelerator, another Route 53 record in the same zone, **VPC Lattice service custom domain endpoints** (2025), **CloudFront distribution tenants** (2025).
+**Alias targets supported**: ELB, CloudFront, API Gateway, Elastic Beanstalk, S3 website endpoints, VPC Interface Endpoints, Global Accelerator, another Route 53 record in the same zone, **VPC Lattice service custom domain endpoints**, **CloudFront distribution tenants**.
 **Cannot alias to**: EC2 DNS name directly.
 
 ---
@@ -157,15 +157,15 @@ DNS resolution between on-prem and AWS VPCs.
 - **System rules**: exceptions to forwarding (e.g., for AWS private hosted zones)
 - **Shareable across accounts via AWS RAM** — key for multi-account hybrid DNS
 
-### Route 53 Profiles (2024–2025)
+### Route 53 Profiles
 - Shareable configuration bundle for Route 53 across multiple VPCs / accounts
-- Can include: private hosted zone associations, Resolver rules, DNS Firewall rule groups, DNSSEC validation settings, **Resolver query logging configs** (Nov 2025)
+- Can include: private hosted zone associations, Resolver rules, DNS Firewall rule groups, DNSSEC validation settings, **Resolver query logging configs**
 - Can associate VPC interface endpoints
 - Available in an expanding set of Regions
 
 ---
 
-## Route 53 Global Resolver (GA March 9, 2026)
+## Route 53 Global Resolver
 
 Internet-reachable **anycast DNS resolution** globally — an enterprise-managed alternative to public resolvers like 1.1.1.1 or 8.8.8.8.
 
@@ -202,10 +202,10 @@ Filter outbound DNS traffic from your VPCs.
 - **Rule groups** with ordered rules → domain lists + actions (ALLOW / BLOCK / ALERT)
 - Block responses: NODATA, NXDOMAIN, or custom OVERRIDE
 - **AWS Managed Domain Lists**: malware, botnet, phishing, content filtering
-- **DNS Firewall Advanced** (2025) — real-time anomaly detection:
+- **DNS Firewall Advanced** — real-time anomaly detection:
   - **DNS Tunneling** — data exfiltration via DNS queries
   - **Domain Generation Algorithm (DGA)** — malware-generated random domains
-  - **Dictionary-based DGA** (Nov 2025) — DGA variant using dictionary word concatenations, mimicking legit domains; GA in all Regions including GovCloud
+  - **Dictionary-based DGA** — DGA variant using dictionary word concatenations, mimicking legit domains; GA in all Regions including GovCloud
   - Configurable confidence: High / Medium / Low
   - Detects on query length, entropy, frequency — catches **previously unknown** domains, not just known-bad lists
 - Rule groups shareable via **AWS RAM**, includable in **Route 53 Profiles**
@@ -217,7 +217,7 @@ Filter outbound DNS traffic from your VPCs.
 
 - **Public hosted zones**: CloudWatch Logs in **us-east-1**
 - **Resolver query logs**: CloudWatch Logs, S3, or Kinesis Data Firehose
-- Resolver query log configs **shareable via AWS RAM**, **includable in Route 53 Profiles** (Nov 2025)
+- Resolver query log configs **shareable via AWS RAM**, **includable in Route 53 Profiles**
 - Use case: investigation, compliance, malware / exfiltration detection (pair with DNS Firewall Advanced)
 
 ---
@@ -230,7 +230,7 @@ Deterministic, low-latency, operator-controlled failover for multi-Region apps �
 - **Routing controls** — simple ON/OFF switches per Region, evaluated by Route 53 health checks; flipping a control updates DNS responses instantly
 - **Safety rules** — enforce invariants ("at least one Region ON", "only one ON at a time") — prevent total outage or split-brain
 - **Cluster** = 5 Regional endpoints (Region-redundant control plane); use any endpoint during outages
-- **Zonal Shift / Zonal Autoshift** (2024) — evacuate a single AZ from ALB / NLB / ECS / EKS without flipping the whole Region
+- **Zonal Shift / Zonal Autoshift** — evacuate a single AZ from ALB / NLB / ECS / EKS without flipping the whole Region
 - Use case: active-active multi-Region with one-click controlled failover; active-passive DR; AZ evacuation under impairment
 
 ---
@@ -242,7 +242,7 @@ Deterministic, low-latency, operator-controlled failover for multi-Region apps �
 - Supports all routing policies and can combine them (latency + weighted + failover)
 - Reusable, versioned policies; policy records apply policies to hosted zones
 - Cost: per policy record per month
-- **New Traffic Flow console experience** (February 2025)
+- **New Traffic Flow console experience**
 
 ---
 
@@ -251,7 +251,7 @@ Deterministic, low-latency, operator-controlled failover for multi-Region apps �
 - Register and manage domains
 - Transfer in/out, auto-renewal
 - **Registrar lock** (transfer lock) to prevent unauthorized transfers
-- **2026**: support for `.ai` and other newer TLDs
+- Support for `.ai` and other newer TLDs
 
 ---
 
@@ -266,7 +266,7 @@ Deterministic, low-latency, operator-controlled failover for multi-Region apps �
 | Elastic Beanstalk | Alias to environment URL |
 | Global Accelerator | Alias to accelerator DNS |
 | VPC Interface Endpoints | Alias |
-| VPC Lattice (2025) | Alias to service custom domain endpoints |
+| VPC Lattice | Alias to service custom domain endpoints |
 
 ---
 
@@ -283,7 +283,7 @@ Deterministic, low-latency, operator-controlled failover for multi-Region apps �
 - **Weighted with weight=0** stops traffic; useful during maintenance or migrations
 - **DNSSEC KSK** must use **KMS in us-east-1**, asymmetric **ECC_NIST_P256**
 - **Resolver rules shared via AWS RAM** — key for multi-account hybrid DNS
-- **DNS Firewall Advanced** detects DNS tunneling, DGA, **Dictionary DGA** (Nov 2025) — answer for DNS exfiltration / unknown malicious domains
+- **DNS Firewall Advanced** detects DNS tunneling, DGA, **Dictionary DGA** — answer for DNS exfiltration / unknown malicious domains
 - **Multi-Region failover that must be deterministic** → **Route 53 ARC routing controls + safety rules**, not pure failover routing
 - **Zonal Shift / Zonal Autoshift** = AZ-level evacuation for ALB / NLB / ECS / EKS — first-line response for single-AZ impairment
 - **Global Resolver** = anycast public + private resolver, replaces 1.1.1.1 / 8.8.8.8 for fleet; **Resolver endpoints** = hybrid DNS forwarding to/from on-prem

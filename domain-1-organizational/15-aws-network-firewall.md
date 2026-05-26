@@ -60,7 +60,7 @@ Maps to: **Domain 1.1 — Architect network connectivity strategies** (traffic i
 - **5-tuple** — same as stateless but with connection tracking
 - **Suricata-compatible** — full Suricata rule syntax for IPS/IDS signatures
 
-### TLS Inspection (since 2023)
+### TLS Inspection
 - Decrypt TLS to inspect payload
 - Requires ACM certificate
 - Can be used with managed signatures for deep inspection
@@ -77,7 +77,7 @@ Maps to: **Domain 1.1 — Architect network connectivity strategies** (traffic i
 - Detailed flow records of all traffic through the firewall
 - Useful for compliance and forensics
 
-### Flow Capture and Flow Flush (2025)
+### Flow Capture and Flow Flush
 - **Capture** active flow metadata for monitoring
 - **Flush** active flows to terminate them during security incidents
 
@@ -106,9 +106,9 @@ Maps to: **Domain 1.1 — Architect network connectivity strategies** (traffic i
 - Deploy in **inspection VPC + TGW** for centralized scope; deploy per-VPC for low-latency / data-residency
 - **Stateful for connection tracking + Suricata; stateless for simple 5-tuple filters**
 - Integrates with **Firewall Manager** for org-wide deployment
-- **TLS inspection** (2023) for inspecting encrypted traffic
+- **TLS inspection** for inspecting encrypted traffic
 - Combines with **CloudWatch Logs / S3 / Firehose** for alert and flow logging
-- **Flow Capture + Flow Flush** (2025) for incident response — terminate suspicious flows
+- **Flow Capture + Flow Flush** for incident response — terminate suspicious flows
 
 ---
 

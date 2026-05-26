@@ -94,7 +94,7 @@ Maps to: **Domain 1.1 — Architect network connectivity strategies** (edge plac
 
 ---
 
-## 2025–2026 Expansion
+## Expansion
 
 - New Local Zones added in metros across **North America, Europe, Asia-Pacific, Latin America**
 - More services added per Zone over time

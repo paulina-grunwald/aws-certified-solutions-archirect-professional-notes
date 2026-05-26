@@ -60,7 +60,7 @@ Maps to: **Domain 1.4 — Design a multi-account AWS environment**
 - **AWS CloudHSM** (Clusters)
 - **Amazon DataZone** (Domains)
 - **Amazon Bedrock** (Custom models, Model invocation profiles)
-- **AWS Billing and Cost Management** dashboards (Aug 2025)
+- **AWS Billing and Cost Management** dashboards
 - **IPAM Pools**
 - **Image Builder** (Components, Images, Recipes)
 

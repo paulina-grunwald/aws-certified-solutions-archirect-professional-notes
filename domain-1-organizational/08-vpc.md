@@ -53,7 +53,7 @@ Maps to: **Domain 1.1 — Architect network connectivity strategies**
 - Static public IPv4 address; limited to 5 per Region by default
 - Can be moved between instances/ENIs for failover
 - Charged when NOT associated with a running instance
-- As of February 2024, AWS charges for **all public IPv4 addresses** ($0.005/hr) including those on running instances
+- AWS charges for **all public IPv4 addresses** ($0.005/hr) including those on running instances
 
 ---
 
@@ -187,13 +187,13 @@ Capture IP traffic **metadata** at VPC, subnet, or ENI level. Three destinations
 - Centralized deployment via Transit Gateway (**inspection VPC** pattern)
 - Integrates with Firewall Manager for multi-account governance
 - Logging: alert and flow logs to CloudWatch, S3, or Kinesis; CloudWatch dashboards for visibility
-- **Flow capture and flow flush** (2025): capture active flow metadata for monitoring; selectively terminate flows during security incidents
+- **Flow capture and flow flush**: capture active flow metadata for monitoring; selectively terminate flows during security incidents
 - Supports both stateful and stateless rule groups
 - **When to use**: domain filtering, IPS/IDS, centralized inspection, Suricata rules, compliance requirements
 
 ---
 
-## VPC Lattice (2023–2025)
+## VPC Lattice
 
 - **Application-layer service mesh** for service-to-service communication
 - Simplifies connectivity across VPCs and accounts without TGW, PrivateLink, or NAT
@@ -202,8 +202,8 @@ Capture IP traffic **metadata** at VPC, subnet, or ENI level. Three destinations
   - **Service Network** — logical grouping
   - **Service** — a single application
   - **Target Group** — instances, IPs, Lambda, ALB
-- **Resource Gateway** (2024–2025): enables access to TCP resources (databases, DNS names, IPs) across VPCs/accounts
-  - Configurable IP addresses per ENI for resource gateways (Oct 2025)
+- **Resource Gateway**: enables access to TCP resources (databases, DNS names, IPs) across VPCs/accounts
+  - Configurable IP addresses per ENI for resource gateways
 - **Service Network VPC Endpoint**: powered by PrivateLink, allows connectivity from on-premises via DX/VPN
 - Auth: IAM policies + security groups; supports SigV4 signing
 - Automatically handles service discovery, load balancing, and connectivity
@@ -212,7 +212,7 @@ Capture IP traffic **metadata** at VPC, subnet, or ENI level. Three destinations
 
 ---
 
-## VPC Encryption Controls (Nov 2025)
+## VPC Encryption Controls
 
 - New capability to audit and enforce **encryption in transit** within and across VPCs in a Region
 - Modes:
@@ -221,7 +221,7 @@ Capture IP traffic **metadata** at VPC, subnet, or ENI level. Three destinations
 - Applied at VPC level; works for traffic between VPCs and within a VPC
 - Uses **hardware-level encryption on Nitro-based instances**
 - Useful for compliance requirements (HIPAA, PCI-DSS, financial regulations)
-- Charged per hour for VPCs with encryption controls enabled (free introductory period ended March 2026)
+- Charged per hour for VPCs with encryption controls enabled
 
 ---
 
@@ -265,7 +265,7 @@ Capture IP traffic **metadata** at VPC, subnet, or ENI level. Three destinations
 - **"Multicast"** → **Transit Gateway** (only AWS service supporting multicast)
 - **"Increase VPN bandwidth"** → **ECMP over TGW** (multiple VPN tunnels; NOT supported with VGW)
 - **VPC Lattice questions** → application-layer service mesh replacing complex TGW+PrivateLink for microservices
-- **"Encryption in transit within VPC"** + compliance → **VPC Encryption Controls** (2025 feature)
+- **"Encryption in transit within VPC"** + compliance → **VPC Encryption Controls**
 - When two connectivity options seem valid, compare cost: VPC peering is cheapest for 2-VPC scenarios; TGW charges per attachment + data
 
 ---
