@@ -143,4 +143,4 @@ Maps to: **Domain 1.2 — Prescribe security controls** (data protection)
 - Custom Key Store availability **depends on the CloudHSM cluster** — a cluster outage means KMS operations fail for any keys backed by that cluster
 - Backups are **encrypted with AWS-managed keys** — you can restore a cluster from backup but cannot extract raw key material
 - CloudHSM is **not multi-Region** — for cross-Region you need separate clusters and your own key replication strategy
-- CloudHSM Classic is **deprecated** — current version is CloudHSM v2 (since 2017); old exam material may reference Classic
+- CloudHSM Classic is **deprecated** — current version is CloudHSM v2; old exam material may reference Classic
