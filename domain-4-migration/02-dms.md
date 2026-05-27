@@ -1,6 +1,6 @@
 # AWS Database Migration Service (DMS)
 
-> **Migrate databases to / from AWS with minimal downtime. Source DB stays available during migration. Supports homogeneous (Oracle → Oracle) and heterogeneous (Oracle → Aurora PostgreSQL) migrations. Continuous CDC replication. Pair with AWS Schema Conversion Tool (SCT) for heterogeneous schema. DMS Serverless (GA 2023) — no replication instance to manage.**
+> **Migrate databases to / from AWS with minimal downtime. Source DB stays available during migration. Supports homogeneous (Oracle → Oracle) and heterogeneous (Oracle → Aurora PostgreSQL) migrations. Continuous CDC replication. Pair with AWS Schema Conversion Tool (SCT) for heterogeneous schema. DMS Serverless — no replication instance to manage.**
 
 Maps to: **Domain 4.2 — Optimal migration approach**, **Domain 4.3 — New architecture for existing workloads**
 
@@ -12,7 +12,7 @@ Maps to: **Domain 4.2 — Optimal migration approach**, **Domain 4.3 — New arc
 - **Source DB stays available** during the migration
 - **Continuous replication via CDC** — sync after the initial load
 - **Provisioned mode** — you size a replication instance (EC2-based)
-- **DMS Serverless** (GA 2023) — fully managed, auto-scales replication capacity
+- **DMS Serverless** — fully managed, auto-scales replication capacity
 - **Fleet Advisor** assesses on-prem DB inventory + sizing recommendations
 
 ---
@@ -61,7 +61,7 @@ Maps to: **Domain 4.2 — Optimal migration approach**, **Domain 4.3 — New arc
 
 ---
 
-## DMS Serverless (GA 2023)
+## DMS Serverless
 
 - **No replication instance** — DMS scales **DCUs (DMS Capacity Units)** based on workload
 - Pay per DCU-hour + per GB migrated
@@ -138,7 +138,7 @@ flowchart LR
 
 - "Migrate database to AWS with minimal downtime" → **DMS** (source stays available)
 - "Heterogeneous engine migration" (Oracle → PostgreSQL) → **DMS + SCT**
-- "No replication instance to manage" → **DMS Serverless** (2023+)
+- "No replication instance to manage" → **DMS Serverless**
 - "Continuous replication from on-prem to AWS" → **DMS CDC ongoing replication**
 - "Validate migrated data matches source" → **DMS Data Validation**
 - "SQL Server → PostgreSQL with T-SQL compatibility" → **Babelfish for Aurora PostgreSQL** (SCT + DMS to migrate)
