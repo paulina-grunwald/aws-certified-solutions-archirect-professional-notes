@@ -1,6 +1,6 @@
 # AWS Client VPN
 
-> **Managed, OpenVPN-based remote-access VPN. End users connect from laptops / mobiles to a VPC (and optionally on-prem via VGW/TGW). Three auth methods: Active Directory, Mutual TLS certificates, SAML SSO. Split tunnel (default — only VPC traffic) vs full tunnel (all traffic via VPN for inspection). Self-service portal (Sep 2024). Client connect handler (Lambda) for runtime connection control.**
+> **Managed, OpenVPN-based remote-access VPN. End users connect from laptops / mobiles to a VPC (and optionally on-prem via VGW/TGW). Three auth methods: Active Directory, Mutual TLS certificates, SAML SSO. Split tunnel (default — only VPC traffic) vs full tunnel (all traffic via VPN for inspection). Self-service portal. Client connect handler (Lambda) for runtime connection control.**
 
 Maps to: **Domain 1.1 — Hybrid connectivity (remote access)**, **Domain 1.2 — Security controls**
 
@@ -13,7 +13,7 @@ Maps to: **Domain 1.1 — Hybrid connectivity (remote access)**, **Domain 1.2 �
 - **No custom VPN server / bastion host needed**
 - **Scales with connected users**
 - Integrates with **VGW** (on-prem), **TGW** (multi-VPC), **Route 53 Resolver** (DNS)
-- **IPv4** only (IPv6 routing through tunnel NOT supported as of 2026)
+- **IPv4** only (IPv6 routing through tunnel NOT supported)
 
 ---
 
@@ -65,8 +65,8 @@ All methods can be combined with **client certificate** as a second factor.
 - **Subnet associations** — VPC subnets the endpoint can reach (one ENI per subnet)
 - **Authorization rules** — control which CIDRs each user / group can reach
 - **Route table** — additional CIDRs (on-prem via VGW, other VPCs via TGW, 0.0.0.0/0)
-- **Self-service portal (Sep 2024)** — managed web UI for users to download configs
-- **Client connect handler (2021+)** — Lambda invoked per connection for allow / deny
+- **Self-service portal** — managed web UI for users to download configs
+- **Client connect handler** — Lambda invoked per connection for allow / deny
 - **Client login banner** — custom message at connect time
 
 ---
@@ -93,7 +93,7 @@ Endpoint attaches to **one VPC**; other VPCs / on-prem reached via TGW.
 
 ---
 
-## Self-Service Portal (Sep 2024)
+## Self-Service Portal
 
 - Managed web UI for users to download VPN config + client
 - Eliminates manual cert / config distribution
@@ -101,7 +101,7 @@ Endpoint attaches to **one VPC**; other VPCs / on-prem reached via TGW.
 
 ---
 
-## Client Connect Handler (Lambda, 2021+)
+## Client Connect Handler (Lambda)
 
 - Lambda invoked on connection establishment
 - Use cases:
@@ -148,7 +148,7 @@ Endpoint attaches to **one VPC**; other VPCs / on-prem reached via TGW.
 - "OpenVPN-based managed remote access" → **AWS Client VPN**
 - **3 auth types**: AD, mutual TLS (ACM Private CA), SAML SSO
 - **Split tunnel default**; **full tunnel** when inspection required (route 0.0.0.0/0)
-- **Self-service portal (Sep 2024)** for user config download
+- **Self-service portal** for user config download
 - **Client connect handler (Lambda)** for runtime allow / deny per connection
 - **Reach on-prem via VGW / TGW** — attach endpoint to a VPC with connections
 - **Authorization rules** restrict CIDR access per user / group
@@ -160,7 +160,7 @@ Endpoint attaches to **one VPC**; other VPCs / on-prem reached via TGW.
 ## Exam Traps
 
 - **Client VPN ≠ Site-to-Site VPN** — Client = end users; S2S = network-to-network
-- **IPv6 routing through tunnel NOT supported** as of 2026
+- **IPv6 routing through tunnel NOT supported**
 - **Modifying route table in split-tunnel mode resets all active connections** — switch to full-tunnel first
 - **Authorization rules are mandatory** for VPC access — even with a route
 - **Endpoint attaches to one VPC** — multi-VPC via TGW

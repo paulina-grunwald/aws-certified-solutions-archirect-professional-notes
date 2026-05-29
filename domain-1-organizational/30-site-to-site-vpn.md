@@ -88,7 +88,7 @@ flowchart LR
 - **AES**: AES128-GCM-16, AES256-GCM-16 (AEAD), AES128-CBC, AES256-CBC
 - **Integrity**: SHA1, SHA-256, SHA-384, SHA-512
 - **DH groups**: 2, 5, 14–18, 19–21, 22–24 (22–24 = ECDSA)
-- **Pre-Shared Key (PSK)** default; **Certificate-based auth** via ACM Private CA (since 2021)
+- **Pre-Shared Key (PSK)** default; **Certificate-based auth** via ACM Private CA
 - **Dead Peer Detection (DPD)** — auto-reset tunnel on failure
 - **Rekey margins** + **lifetime** configurable
 

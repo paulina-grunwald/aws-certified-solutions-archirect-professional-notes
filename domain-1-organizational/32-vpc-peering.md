@@ -53,7 +53,7 @@ A ↔ B and A ↔ C exist; B ↔ C still requires its own peering.
 
 ## Cross-Region Peering
 
-- Available since 2017
+- Cross-Region peering supported
 - Traffic encrypted in transit on AWS backbone
 - IPv6 supported
 - Per-GB inter-Region transfer charges
@@ -85,8 +85,8 @@ A ↔ B and A ↔ C exist; B ↔ C still requires its own peering.
 
 ### TGW Network Manager + Cloud WAN
 
-- **Network Manager** (2020) — central observability for TGW + DX + VPN
-- **AWS Cloud WAN** (Mar 2022) — managed global WAN; simpler than DIY TGW peering mesh
+- **Network Manager** — central observability for TGW + DX + VPN
+- **AWS Cloud WAN** — managed global WAN; simpler than DIY TGW peering mesh
 
 ---
 
@@ -118,7 +118,7 @@ A ↔ B and A ↔ C exist; B ↔ C still requires its own peering.
 - **CIDRs must NOT overlap** — design upfront for future peering
 - **Update route tables in BOTH VPCs**
 - **Cross-account peering**: requester → accepter
-- **Cross-Region peering** supported since 2017
+- **Cross-Region peering** supported
 - **SG ID references work cross-peering within the same Region**; cross-Region needs CIDR
 - **For > ~5 VPCs use TGW** — peering becomes O(n²)
 - **VPC peering connects only 2 VPCs**

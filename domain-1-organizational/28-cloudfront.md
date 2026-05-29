@@ -1,6 +1,6 @@
 # Amazon CloudFront
 
-> **AWS's global CDN with 600+ edge locations + 13 Regional Edge Caches. Caches HTTP/S content close to users. Origins: S3, ALB, NLB, EC2, custom HTTP, Lambda Function URLs, MediaPackage, VPC Origins (Nov 2024), S3 static website. Edge compute via CloudFront Functions (lightweight JS at edge) + Lambda@Edge (Node/Python at REC). Modern features: KeyValueStore (Apr 2024), Distribution Tenants (Nov 2024), Continuous Deployment, Anycast IPs, gRPC, HTTP/3 + TLS 1.3.**
+> **AWS's global CDN with 600+ edge locations + 13 Regional Edge Caches. Caches HTTP/S content close to users. Origins: S3, ALB, NLB, EC2, custom HTTP, Lambda Function URLs, MediaPackage, VPC Origins, S3 static website. Edge compute via CloudFront Functions (lightweight JS at edge) + Lambda@Edge (Node/Python at REC). Modern features: KeyValueStore, Distribution Tenants, Continuous Deployment, Anycast IPs, gRPC, HTTP/3 + TLS 1.3.**
 
 Maps to: **Domain 1.1 — Network connectivity**, **Domain 2.5 — Edge / performance**, **Domain 1.2 — Edge security (WAF / Shield)**, **Domain 2.3 — Security controls**
 
@@ -9,7 +9,7 @@ Maps to: **Domain 1.1 — Network connectivity**, **Domain 2.5 — Edge / perfor
 ## Overview
 
 - Global CDN — caches static + dynamic content at edges
-- **600+ Points of Presence** + **13 Regional Edge Caches** (2026)
+- **600+ Points of Presence** + **13 Regional Edge Caches**
 - Use cases: web / app acceleration, video streaming, software downloads, API acceleration, security perimeter
 - Native integration with WAF, Shield, ACM, Route 53, Cognito, S3, Lambda@Edge
 
