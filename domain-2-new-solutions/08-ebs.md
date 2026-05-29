@@ -1,6 +1,6 @@
 # Amazon EBS (Elastic Block Store)
 
-> **Persistent block storage attached to EC2 over the network. AZ-scoped, replicated within the AZ, snapshotted to S3 (cross-Region copyable). Six volume types (gp3 default for new, io2 Block Express for highest performance). Multi-Attach for io1/io2 cluster apps. Encrypted by default since 2020.**
+> **Persistent block storage attached to EC2 over the network. AZ-scoped, replicated within the AZ, snapshotted to S3 (cross-Region copyable). Six volume types (gp3 default for new, io2 Block Express for highest performance). Multi-Attach for io1/io2 cluster apps. Encrypted by default.**
 
 Maps to: **Domain 2.5 — Storage selection**, **Domain 1.3 — Reliability**, **Domain 3.5 — Cost optimization**
 
@@ -14,8 +14,8 @@ Maps to: **Domain 2.5 — Storage selection**, **Domain 1.3 — Reliability**, *
 - Multiple volumes can be attached to one EC2 instance
 - **Snapshots live in S3** (managed; you don't see the bucket); **incremental** — only changed blocks since the last snapshot
 - **Persistent across stop/reboot** (unlike instance store)
-- **gp3 is the default** for new general-purpose volumes since 2020
-- **Encrypted by default** at account+region level since 2020 (AWS-owned key by default; customer-managed KMS optional)
+- **gp3 is the default** for new general-purpose volumes
+- **Encrypted by default** at account+region level (AWS-owned key by default; customer-managed KMS optional)
 
 ## IOPS vs Throughput vs Bandwidth
 
