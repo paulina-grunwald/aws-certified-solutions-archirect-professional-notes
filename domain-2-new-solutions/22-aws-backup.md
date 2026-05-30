@@ -26,7 +26,7 @@ Maps to: **Domain 2.2 — Design solutions for business continuity** (backup & r
 - **Amazon EFS**
 - **Amazon FSx** (Windows File Server, Lustre, NetApp ONTAP, OpenZFS)
 - **AWS Storage Gateway** (Volume Gateway snapshots)
-- **Amazon S3** (since Feb 2022)
+- **Amazon S3**
 
 ### Databases
 - **Amazon RDS** (all engines, including continuous backup with PITR)
@@ -108,7 +108,7 @@ Enforce **Write Once, Read Many (WORM)** on backups stored in a vault.
 
 ---
 
-## Logically Air-Gapped Vault (GA August 2024)
+## Logically Air-Gapped Vault
 
 **Ransomware-resistant backup vault** — stores immutable backup copies in an **AWS-owned account**, isolated from your account.
 
@@ -117,10 +117,10 @@ Enforce **Write Once, Read Many (WORM)** on backups stored in a vault.
 - **Vault Lock automatically enforced** in compliance mode
 - Encrypted with AWS-owned keys by default; customer-managed KMS keys also supported
 - **Cross-account / cross-Region restore** without restoring to source account first
-- **Direct backup** to air-gapped vault supported as of **November 2025** (previously had to copy from a regular vault first)
+- **Direct backup** to air-gapped vault supported (previously had to copy from a regular vault first)
 
 ### Supported services (growing list)
-EBS, RDS, DynamoDB, EFS, Aurora, S3, FSx (March 2025)
+EBS, RDS, DynamoDB, EFS, Aurora, S3, FSx
 
 ### Use cases
 - **Ransomware recovery** — attackers in your account cannot delete or encrypt the backups
@@ -131,7 +131,7 @@ EBS, RDS, DynamoDB, EFS, Aurora, S3, FSx (March 2025)
 
 ---
 
-## Restore Testing (Sep 2023)
+## Restore Testing
 
 **Automated validation that your backups actually work** — schedules test restores on a recurring basis to validate recoverability.
 
@@ -207,7 +207,7 @@ Both can be combined: copy backup → another Region AND another account simulta
 - **Vault-level encryption** — each backup vault has a KMS key (AWS-managed or customer-managed)
 - Backup data is **always encrypted at rest** with the vault's key
 - **Cross-Region / cross-account copies** can use a different KMS key in the destination
-- **Logically air-gapped vaults**: AWS-owned key by default; customer-managed KMS keys also supported (added 2025)
+- **Logically air-gapped vaults**: AWS-owned key by default; customer-managed KMS keys also supported
 - Encryption keys are NOT replicated automatically — you must grant the destination key access
 
 ---
@@ -286,7 +286,7 @@ When to use AWS Backup vs native (e.g., RDS automated backups, EBS snapshot via 
 - **Backup Plans** with **tag-based resource selection** scale better than resource IDs
 - **Backup Vault Lock Compliance mode** is the answer for "immutable backup that even root cannot delete"
 - **Logically air-gapped vault** is the answer for "protect backups from ransomware / account compromise"
-- **Restore Testing** (Sep 2023) is the answer for "verify backups are actually recoverable on an ongoing basis"
+- **Restore Testing** is the answer for "verify backups are actually recoverable on an ongoing basis"
 - **AWS Backup Audit Manager** is the answer for "compliance evidence about backup coverage"
 - **AWS Organizations backup policies** for org-wide enforcement (additive across OUs, unlike SCPs which intersect)
 - **Cross-Region + cross-account copies** for defense in depth

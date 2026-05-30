@@ -6,7 +6,7 @@ Maps to: **Domain 2.5 — Design high-performance architectures** (compute / dat
 
 ---
 
-## Service Portfolio (2026)
+## Service Portfolio
 
 | Service | Purpose | Status |
 |---|---|---|
@@ -57,7 +57,7 @@ The foundation of every IoT workload on AWS.
 - **Secure tunneling**: open temporary, encrypted bidirectional connections (e.g., SSH) to a device behind a firewall — without exposing public ports
 - **Remote actions**: send commands and receive responses (vs Jobs which are deployment-style)
 - **Fleet Indexing**: query device state across the fleet (`"all devices reporting battery < 10%"`)
-- **Software Package Catalog** (2024): manage versioned software packages and deploy via Jobs
+- **Software Package Catalog**: manage versioned software packages and deploy via Jobs
 
 **Exam pattern**: scenario says **"securely onboard, organize, monitor, and remotely manage thousands of IoT devices"** → **IoT Device Management**.
 
@@ -105,7 +105,7 @@ The foundation of every IoT workload on AWS.
 - **Asset modeling**: define hierarchies (Site → Production Line → Machine → Sensor) and compute derived metrics (OEE, performance, throughput)
 - **Storage tiers**: hot (recent data, fast access), cold (S3 long-term archival via SiteWise managed)
 - **SiteWise Monitor**: managed web portal for operators to visualize asset data
-- **Alarms** (2024): integrate with CloudWatch Alarms after IoT Events end-of-life
+- **Alarms**: integrate with CloudWatch Alarms after IoT Events end-of-life
 - **Edge mode**: run SiteWise locally on Greengrass for low-latency / disconnected operation
 - Time-series + asset model native; no need to build your own data store
 
@@ -120,7 +120,7 @@ The foundation of every IoT workload on AWS.
 - Designed for **vehicle CAN bus, OBD-II, J1939, automotive Ethernet** signals
 - **Signal catalog**: standardized definitions of vehicle signals across makes/models
 - **Decoder manifest**: maps raw CAN data to standardized signals
-- **Vision system data** (2024): camera and lidar metadata ingestion for ADAS / AV development
+- **Vision system data**: camera and lidar metadata ingestion for ADAS / AV development
 - **Edge agent**: runs on vehicle's in-vehicle computer; collects, filters, uploads on configurable triggers
 - **Campaigns**: define what data to collect, from which vehicles, on what conditions
 
