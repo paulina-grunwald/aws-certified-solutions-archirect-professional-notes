@@ -72,7 +72,6 @@ Pre-built templates for common patterns:
 - **CloudWatch metrics** — performance percentiles, error counts, session counts
 - **Dashboards** in CloudWatch RUM console — page load distribution, error grouping, user journey funnels
 - **CloudWatch ServiceLens** — correlate RUM with X-Ray traces + CloudWatch metrics
-- **CloudWatch Evidently** integration for A/B testing impact analysis (Evidently is being deprecated 2025)
 
 ### Use Cases
 
@@ -89,22 +88,23 @@ Pre-built templates for common patterns:
 
 ## Synthetics vs RUM — When to Use Which
 
-| Need | Pick |
-|---|---|
-| "Is my site up right now?" — independent monitoring | **Synthetics** |
-| "What latency are my actual users seeing?" | **RUM** |
-| Detect outages before users notice | **Synthetics** |
-| Diagnose performance regressions in prod | **RUM** |
-| Certificate expiry warning | **Synthetics** |
-| Real-user JS errors | **RUM** |
-| Multi-step user journey validation | **Synthetics** (with Puppeteer) |
-| Core Web Vitals | **RUM** |
+| Need                                                | Pick                            |
+| --------------------------------------------------- | ------------------------------- |
+| "Is my site up right now?" — independent monitoring | **Synthetics**                  |
+| "What latency are my actual users seeing?"          | **RUM**                         |
+| Detect outages before users notice                  | **Synthetics**                  |
+| Diagnose performance regressions in prod            | **RUM**                         |
+| Certificate expiry warning                          | **Synthetics**                  |
+| Real-user JS errors                                 | **RUM**                         |
+| Multi-step user journey validation                  | **Synthetics** (with Puppeteer) |
+| Core Web Vitals                                     | **RUM**                         |
 
 **Use both** for full coverage: Synthetics catches outages immediately; RUM shows real-user impact.
 
 ## ServiceLens Integration
 
 Both feed **CloudWatch ServiceLens**:
+
 - RUM data → frontend perf
 - Synthetics → endpoint availability
 - X-Ray → backend traces
@@ -115,21 +115,25 @@ One pane for frontend → backend correlation.
 ## Common Patterns
 
 ### Multi-region availability monitoring
+
 - Synthetics canary deployed in 5 Regions
 - Each runs every 60s, hits the same prod endpoint
 - Region with >1 min failure → alarm + Route 53 health check failover
 
 ### Pre-release validation
+
 - Synthetics canary against staging environment
 - Run on every CodeDeploy deployment via EventBridge trigger
 - Auto-rollback if canary fails
 
 ### Real-user performance baseline
+
 - RUM on all pages, sample 100%
 - Dashboard: p90 page load by browser × geography
 - Identify regressions per release
 
 ### Frontend → backend trace
+
 - ServiceLens: RUM session → X-Ray trace
 - Click slow page → see exact backend call that caused latency
 
@@ -151,5 +155,4 @@ One pane for frontend → backend correlation.
 - **Synthetics canary failures don't auto-fix anything** — they alarm; you build the remediation
 - **Canaries cost per run** — running every minute in 5 Regions = ~$8.6/month per canary minimum
 - **RUM requires Cognito Identity Pool** — unauthenticated browsers need temporary creds
-- **CloudWatch Evidently being deprecated 2025** — don't pick it for new feature flag use cases; use AWS AppConfig Feature Flags instead
 - **Synthetics is a CloudWatch service, not standalone** — billed under CloudWatch

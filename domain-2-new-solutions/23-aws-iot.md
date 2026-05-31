@@ -17,7 +17,7 @@ Maps to: **Domain 2.5 — Design high-performance architectures** (compute / dat
 | **IoT SiteWise** | Industrial / OPC-UA equipment data ingestion + asset modeling | Active |
 | **IoT FleetWise** | Vehicle telemetry (connected cars, fleets) | Active |
 | **IoT TwinMaker** | Digital twins (3D scenes + live data overlays) | Active |
-| **IoT Events** | Event detection from sensor streams (state machines) | **End of support May 20, 2026** — no new customers since May 2025 |
+| **IoT Events** | Event detection from sensor streams (state machines) | **End of support May 20, 2036
 | **IoT Analytics** | Analytics pipeline for IoT data | **Deprecated** — migrate to Athena / Glue / OpenSearch |
 | **IoT 1-Click** | Single-purpose device trigger (the IoT button) | **Discontinued Dec 16, 2024** |
 | **IoT Things Graph** | Visual workflow builder for devices | Discontinued |
